@@ -1,6 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import * as bcrypt from "bcryptjs";
 
 import db from "./db";
 
@@ -32,22 +33,51 @@ const authOptions: NextAuthOptions = {
         if (!credentials || !credentials.email || !credentials.password) {
           return null;
         }
+        // try {
+        //   const response = await fetch(
+        //     `${process.env.NEXTAUTH_URL}/api/auth/sign-in`,
+        //     {
+        //       method: "POST",
+        //       body: JSON.stringify(credentials),
+        //     }
+        //   );
+        //   if (response.ok) {
+        //     const { user } = await response.json();
+        //     return user;
+        //   } else {
+        //     return null;
+        //   }
+        // } catch (error) {
+        //   console.log(error);
+        //   return null;
+        // }
+
         try {
-          const response = await fetch(
-            `${process.env.NEXTAUTH_URL}/api/auth/sign-in`,
-            {
-              method: "POST",
-              body: JSON.stringify(credentials),
-            }
-          );
-          if (response.ok) {
-            const { user } = await response.json();
-            return user;
-          } else {
+          const user = await db.user.findUnique({
+            where: {
+              email: credentials.email,
+            },
+          });
+
+          if (!user) {
             return null;
           }
+
+          if (!user.status) {
+            return null;
+          }
+
+          const comparedPassword = await bcrypt.compare(
+            credentials.password,
+            user.password as string
+          );
+
+          if (!comparedPassword) {
+            return null;
+          }
+
+          return user;
         } catch (error) {
-          console.log(error);
           return null;
         }
       },
