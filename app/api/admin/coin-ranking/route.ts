@@ -43,11 +43,11 @@ export async function PUT(_req: NextRequest) {
       signal: AbortSignal.timeout(30000),
     });
 
-    const {
-      data: { coins },
-    } = await response.json();
-
     if (response.ok) {
+      const {
+        data: { coins },
+      } = await response.json();
+
       for (let i = 0; i < coins.length; i++) {
         const coin: Coin = coins[i];
         await db.coinRanking.create({
