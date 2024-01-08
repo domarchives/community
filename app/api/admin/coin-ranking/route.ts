@@ -40,6 +40,7 @@ export async function PUT(_req: NextRequest) {
     const response = await fetch(url, {
       method: "GET",
       headers,
+      signal: AbortSignal.timeout(10000),
     });
 
     const {
