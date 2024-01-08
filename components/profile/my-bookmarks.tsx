@@ -1,11 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { X } from "lucide-react";
 import dayjs from "dayjs";
+import ReactPaginate from "react-paginate";
 
 import {
   AlertDialog,
@@ -21,16 +24,38 @@ import {
 import { cn, getThumb } from "@/lib/utils";
 import More from "@/components/svg/more";
 import HottestMd from "@/components/svg/hottest-md";
-import Pagination from "../pagination";
-import { useSession } from "next-auth/react";
+import Next from "@/components/svg/next";
+import Prev from "@/components/svg/prev";
 
 interface Props {
-  posts: any;
-  count: number;
+  page: number;
 }
 
-const MyBookmarks = ({ posts, count }: Props) => {
+const MyBookmarks = ({ page }: Props) => {
   const { data: session } = useSession();
+
+  const [posts, setPosts] = useState<any>([]);
+  const [count, setCount] = useState<number>(0);
+
+  const fetchBookmarks = async (page: number) => {
+    try {
+      const response = await fetch(`/api/bookmarks?page=${page}`, {
+        method: "GET",
+        cache: "no-store",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setPosts(data.posts);
+        setCount(data.count);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchBookmarks(page || 1);
+  }, [page]);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -49,6 +74,10 @@ const MyBookmarks = ({ posts, count }: Props) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handlePageClick = async (event: any) => {
+    await fetchBookmarks(event.selected + 1);
   };
 
   return (
@@ -206,7 +235,16 @@ const MyBookmarks = ({ posts, count }: Props) => {
           })}
         </ul>
       </div>
-      <Pagination pageCount={Math.ceil(count / 10)} />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel={Next()}
+        previousLabel={Prev()}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={Math.ceil(count / 10)}
+        renderOnZeroPageCount={null}
+        className="pagination h-12 w-full flex items-center justify-center gap-x-2.5 border-t border-main-grey"
+      />
     </div>
   );
 };

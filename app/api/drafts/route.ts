@@ -76,6 +76,8 @@ export async function GET(req: NextRequest) {
           orderBy: {
             createdAt: "desc",
           },
+          take: 10,
+          skip: (Number(page) - 1) * 10,
         }),
         db.post.count({
           where: {

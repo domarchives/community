@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 
 import { isAuthenticated } from "@/lib/auth";
-import { fetchBookmarks } from "@/actions/profil-actions";
 import Sidebar from "@/components/profile/sidebar";
 import MyBookmarks from "@/components/profile/my-bookmarks";
 
@@ -18,15 +17,13 @@ export default async function Penanda({ searchParams: { page } }: Props) {
     return redirect("/");
   }
 
-  const { posts, count } = await fetchBookmarks(page || 1);
-
   return (
     <div className="max-w-7xl mx-auto py-5 px-10 pb-10 flex items-start gap-x-[14px]">
       <section className="w-[290px]">
         <Sidebar />
       </section>
       <section className="w-full">
-        <MyBookmarks posts={posts} count={count} />
+        <MyBookmarks page={page} />
       </section>
     </div>
   );

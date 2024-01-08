@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth-options";
 import db from "@/lib/db";
 
-export async function GET(_req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
 
@@ -15,6 +15,9 @@ export async function GET(_req: NextRequest) {
     if (!session.user.role.includes("ADMIN")) {
       return NextResponse.json({ message: "Forbidden" }, { status: 403 });
     }
+
+    const url = new URL(req.url);
+    const page = url.searchParams.get("page");
 
     const [perhatians, count] = await Promise.all([
       db.perhatian.findMany({
@@ -34,6 +37,8 @@ export async function GET(_req: NextRequest) {
             },
           },
         },
+        take: 10,
+        skip: (Number(page) - 1) * 10,
       }),
       db.perhatian.count({
         where: {

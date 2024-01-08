@@ -49,6 +49,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ posts, count }, { status: 200 });
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { message: "INTERNAL SERVER ERROR" },
       { status: 500 }

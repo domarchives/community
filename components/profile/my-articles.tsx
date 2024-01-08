@@ -1,10 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
+import ReactPaginate from "react-paginate";
 
 import { cn, getThumb } from "@/lib/utils";
 import {
@@ -22,15 +25,38 @@ import HottestMd from "@/components/svg/hottest-md";
 import More from "@/components/svg/more";
 import Ubah from "@/components/svg/ubah";
 import Hapus from "@/components/svg/hapus";
-import Pagination from "../pagination";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+import Next from "@/components/svg/next";
+import Prev from "@/components/svg/prev";
 
-const MyArticles = () => {
+interface Props {
+  page: number;
+}
+
+const MyArticles = ({ page }: Props) => {
   const { data: session } = useSession();
 
   const [posts, setPosts] = useState<any>([]);
   const [count, setCount] = useState<number>(0);
+
+  const fetchMyArticles = async (page: number) => {
+    try {
+      const response = await fetch(`/api/profile/my-articles?page=${page}`, {
+        method: "GET",
+        cache: "no-store",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setPosts(data.posts);
+        setCount(data.count);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMyArticles(page || 1);
+  }, [page]);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -49,6 +75,10 @@ const MyArticles = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handlePageClick = async (event: any) => {
+    await fetchMyArticles(event.selected + 1);
   };
 
   return (
@@ -218,7 +248,16 @@ const MyArticles = () => {
           })}
         </ul>
       </div>
-      <Pagination pageCount={Math.ceil(count / 10)} />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel={Next()}
+        previousLabel={Prev()}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={Math.ceil(count / 10)}
+        renderOnZeroPageCount={null}
+        className="pagination h-12 w-full flex items-center justify-center gap-x-2.5 border-t border-main-grey"
+      />
     </div>
   );
 };

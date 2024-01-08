@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
+import ReactPaginate from "react-paginate";
 
 import { cn, getThumb } from "@/lib/utils";
 import {
@@ -22,15 +24,38 @@ import {
 import More from "@/components/svg/more";
 import Ubah from "@/components/svg/ubah";
 import Hapus from "@/components/svg/hapus";
-import Pagination from "@/components/pagination";
+import Next from "@/components/svg/next";
+import Prev from "@/components/svg/prev";
 
 interface Props {
-  perhatians: any;
-  count: number;
+  page: number;
 }
 
-const MyNotices = ({ perhatians, count }: Props) => {
+const MyNotices = ({ page }: Props) => {
   const { data: session } = useSession();
+
+  const [posts, setPosts] = useState<any>([]);
+  const [count, setCount] = useState<number>(0);
+
+  const fetchMyPerhatians = async (page: number) => {
+    try {
+      const response = await fetch(`/api/profile/my-notices?page=${page}`, {
+        method: "GET",
+        cache: "no-store",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setPosts(data.perhatians);
+        setCount(data.count);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMyPerhatians(page || 1);
+  }, [page]);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -49,6 +74,10 @@ const MyNotices = ({ perhatians, count }: Props) => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handlePageClick = async (event: any) => {
+    await fetchMyPerhatians(event.selected + 1);
   };
 
   return (
@@ -101,7 +130,7 @@ const MyNotices = ({ perhatians, count }: Props) => {
 
       <div>
         <ul>
-          {perhatians.map((perhatian: any) => {
+          {posts.map((perhatian: any) => {
             const hasThumb = typeof getThumb(perhatian.body) === "string";
             return (
               <li
@@ -204,7 +233,16 @@ const MyNotices = ({ perhatians, count }: Props) => {
           })}
         </ul>
       </div>
-      <Pagination pageCount={Math.ceil(count / 10)} />
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel={Next()}
+        previousLabel={Prev()}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={Math.ceil(count / 10)}
+        renderOnZeroPageCount={null}
+        className="pagination h-12 w-full flex items-center justify-center gap-x-2.5 border-t border-main-grey"
+      />
     </div>
   );
 };

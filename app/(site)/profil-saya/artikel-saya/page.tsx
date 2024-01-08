@@ -23,7 +23,7 @@ export default async function ArtikelSaya({ searchParams: { page } }: Props) {
         <Sidebar />
       </section>
       <section className="w-full">
-        <MyArticles />
+        <MyArticles page={page} />
       </section>
     </div>
   );
