@@ -59,22 +59,22 @@ const authOptions: NextAuthOptions = {
             },
           });
 
-          // if (!user) {
-          //   return null;
-          // }
+          if (!user) {
+            return null;
+          }
 
-          // if (!user.status) {
-          //   return null;
-          // }
+          if (!user.status) {
+            return null;
+          }
 
-          // const comparedPassword = await bcrypt.compare(
-          //   credentials.password,
-          //   user.password as string
-          // );
+          const comparedPassword = await bcrypt.compare(
+            credentials.password,
+            user.password as string
+          );
 
-          // if (!comparedPassword) {
-          //   return null;
-          // }
+          if (!comparedPassword) {
+            return null;
+          }
 
           return user;
         } catch (error) {
@@ -95,24 +95,24 @@ const authOptions: NextAuthOptions = {
     signIn: "/masuk",
   },
   callbacks: {
-    async signIn({ user }) {
-      try {
-        const response = await fetch(
-          `${process.env.NEXTAUTH_URL}/api/auth/google`,
-          {
-            method: "POST",
-            body: JSON.stringify(user),
-          }
-        );
-        if (response.ok) {
-          return true;
-        } else {
-          return false;
-        }
-      } catch (error) {
-        return false;
-      }
-    },
+    // async signIn({ user }) {
+    //   try {
+    //     const response = await fetch(
+    //       `${process.env.NEXTAUTH_URL}/api/auth/google`,
+    //       {
+    //         method: "POST",
+    //         body: JSON.stringify(user),
+    //       }
+    //     );
+    //     if (response.ok) {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   } catch (error) {
+    //     return false;
+    //   }
+    // },
     async jwt({ token }) {
       const user = await db.user.findUnique({
         where: {
