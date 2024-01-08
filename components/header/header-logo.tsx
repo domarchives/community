@@ -5,7 +5,7 @@ const HeaderLogo = () => {
   return (
     <Link href="/">
       <Image
-        src="/images/header-logo.png"
+        src="/images/kita.png"
         alt="Logo"
         width={142}
         height={40}

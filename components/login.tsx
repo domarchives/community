@@ -54,10 +54,10 @@ const Login = () => {
     <section className="my-[120px]">
       <div className="max-w-[420px] mx-auto p-6 flex flex-col items-center justify-center">
         <Image
-          src="/images/auth-logo.png"
+          src="/images/kita.png"
           alt="Logo"
-          width={420}
-          height={50}
+          width={236}
+          height={68}
           priority
           className="object-contain mb-11"
         />
