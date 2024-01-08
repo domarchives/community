@@ -59,22 +59,22 @@ const authOptions: NextAuthOptions = {
             },
           });
 
-          if (!user) {
-            return null;
-          }
+          // if (!user) {
+          //   return null;
+          // }
 
-          if (!user.status) {
-            return null;
-          }
+          // if (!user.status) {
+          //   return null;
+          // }
 
-          const comparedPassword = await bcrypt.compare(
-            credentials.password,
-            user.password as string
-          );
+          // const comparedPassword = await bcrypt.compare(
+          //   credentials.password,
+          //   user.password as string
+          // );
 
-          if (!comparedPassword) {
-            return null;
-          }
+          // if (!comparedPassword) {
+          //   return null;
+          // }
 
           return user;
         } catch (error) {
