@@ -34,7 +34,7 @@ const CommentForm = ({ mainType, category, postId, session }: Props) => {
     if (session) {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/${mainType}/${category}/${postId}/comments`,
+          `/api/${mainType}/${category}/${postId}/comments`,
           {
             method: "POST",
             body: JSON.stringify(values),

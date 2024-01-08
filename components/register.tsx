@@ -57,13 +57,10 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/sign-up`,
-        {
-          method: "POST",
-          body: JSON.stringify(values),
-        }
-      );
+      const response = await fetch(`/api/auth/sign-up`, {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
 
       const data = await response.json();
 

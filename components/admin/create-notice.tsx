@@ -45,19 +45,14 @@ const CreateNotice = () => {
 
     if (isAuthenticated && isAdmin) {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/admin/perhatian`,
-          {
-            method: "POST",
-            body: JSON.stringify(values),
-          }
-        );
+        const response = await fetch(`/api/admin/perhatian`, {
+          method: "POST",
+          body: JSON.stringify(values),
+        });
         const data = await response.json();
         if (response.ok) {
           form.reset();
-          return router.push(
-            `${process.env.NEXT_PUBLIC_API_URL}/perhatian/${data.perhatian.id}`
-          );
+          return router.push(`/perhatian/${data.perhatian.id}`);
         } else {
           console.log(data);
         }
@@ -79,13 +74,10 @@ const CreateNotice = () => {
         const fileType = file.type.split("/")[1];
 
         try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/uploads`,
-            {
-              method: "POST",
-              body: JSON.stringify({ type: fileType }),
-            }
-          );
+          const response = await fetch(`/api/uploads`, {
+            method: "POST",
+            body: JSON.stringify({ type: fileType }),
+          });
 
           const data = await response.json();
           const { uploadUrl, key } = data;

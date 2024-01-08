@@ -38,12 +38,9 @@ const MyArticles = ({ posts, count }: Props) => {
 
   const removeArticle = async (postId: string) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${postId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "DELETE",
+      });
       const data = await response.json();
       if (response.ok) {
         router.refresh();

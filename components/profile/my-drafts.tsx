@@ -37,12 +37,9 @@ const MyDrafts = ({ posts, count }: Props) => {
 
   const removeDraft = async (postId: string) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/drafts/${postId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/drafts/${postId}`, {
+        method: "DELETE",
+      });
       const data = await response.json();
       if (response.ok) {
         router.refresh();

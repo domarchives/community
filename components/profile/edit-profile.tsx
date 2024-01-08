@@ -50,13 +50,10 @@ const EditProfile = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/profile`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(values),
-        }
-      );
+      const response = await fetch(`/api/profile`, {
+        method: "PATCH",
+        body: JSON.stringify(values),
+      });
       const data = await response.json();
       if (response.ok) {
         await update();
@@ -71,13 +68,10 @@ const EditProfile = () => {
 
   const confirmNameAvailable = async (name: string) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/name/available`,
-        {
-          method: "POST",
-          body: JSON.stringify({ name }),
-        }
-      );
+      const response = await fetch(`/api/auth/name/available`, {
+        method: "POST",
+        body: JSON.stringify({ name }),
+      });
       const data = await response.json();
       if (response.ok) {
         setNameAvailable(true);

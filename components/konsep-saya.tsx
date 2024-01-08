@@ -45,12 +45,9 @@ const KonsepSaya = ({ form, router, fetchKonsepSaya }: Props) => {
 
   const deleteDraft = async (id: string) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/drafts/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/drafts/${id}`, {
+        method: "DELETE",
+      });
       const data = await response.json();
       if (response.ok) {
         router.refresh();

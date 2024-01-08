@@ -29,13 +29,10 @@ const Withdraw = () => {
     e.preventDefault();
     const message = availableTextarea ? customMessage : withdrawMessage;
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/profile/account-cancellation`,
-        {
-          method: "DELETE",
-          body: JSON.stringify({ message }),
-        }
-      );
+      const response = await fetch(`/api/profile/account-cancellation`, {
+        method: "DELETE",
+        body: JSON.stringify({ message }),
+      });
       const data = await response.json();
       if (response.ok) {
         toast({

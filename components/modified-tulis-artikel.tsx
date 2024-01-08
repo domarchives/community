@@ -102,13 +102,10 @@ const ModifiedTulisArtikel = ({ post }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (status === "authenticated") {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/posts/${post.id}`,
-          {
-            method: "PUT",
-            body: JSON.stringify(values),
-          }
-        );
+        const response = await fetch(`/api/posts/${post.id}`, {
+          method: "PUT",
+          body: JSON.stringify(values),
+        });
         const data = await response.json();
         if (response.ok) {
           form.reset();
@@ -139,13 +136,10 @@ const ModifiedTulisArtikel = ({ post }: Props) => {
         const fileType = file.type.split("/")[1];
 
         try {
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/uploads`,
-            {
-              method: "POST",
-              body: JSON.stringify({ type: fileType }),
-            }
-          );
+          const response = await fetch(`/api/uploads`, {
+            method: "POST",
+            body: JSON.stringify({ type: fileType }),
+          });
 
           const data = await response.json();
           const { uploadUrl, key } = data;
@@ -175,16 +169,13 @@ const ModifiedTulisArtikel = ({ post }: Props) => {
       const values = form.getValues();
 
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/drafts`,
-          {
-            method: "POST",
-            body: JSON.stringify({
-              ...values,
-              userId: session.user.id,
-            }),
-          }
-        );
+        const response = await fetch(`/api/drafts`, {
+          method: "POST",
+          body: JSON.stringify({
+            ...values,
+            userId: session.user.id,
+          }),
+        });
         const data = await response.json();
         if (response.ok) {
           form.reset();
@@ -201,13 +192,10 @@ const ModifiedTulisArtikel = ({ post }: Props) => {
 
   const fetchKonsepSaya = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/drafts`,
-        {
-          method: "GET",
-          cache: "no-store",
-        }
-      );
+      const response = await fetch(`/api/drafts`, {
+        method: "GET",
+        cache: "no-store",
+      });
       const data = await response.json();
       if (response.ok) {
         return data;

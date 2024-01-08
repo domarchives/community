@@ -37,12 +37,9 @@ const MyNotices = ({ perhatians, count }: Props) => {
 
   const removeNotice = async (id: string) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/perhatian/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/admin/perhatian/${id}`, {
+        method: "DELETE",
+      });
       const data = await response.json();
       if (response.ok) {
         router.refresh();

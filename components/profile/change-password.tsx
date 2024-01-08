@@ -40,13 +40,10 @@ const ChangePassword = () => {
     }
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/profile/password`,
-        {
-          method: "PATCH",
-          body: JSON.stringify(values),
-        }
-      );
+      const response = await fetch(`/api/profile/password`, {
+        method: "PATCH",
+        body: JSON.stringify(values),
+      });
       const data = await response.json();
       if (response.ok) {
         form.reset();

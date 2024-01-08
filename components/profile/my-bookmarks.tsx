@@ -37,12 +37,9 @@ const MyBookmarks = ({ posts, count }: Props) => {
 
   const removeBookmark = async (postId: string) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/bookmarks/${postId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/bookmarks/${postId}`, {
+        method: "DELETE",
+      });
       const data = await response.json();
       if (response.ok) {
         router.refresh();

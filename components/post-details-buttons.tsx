@@ -23,13 +23,10 @@ const PostDetailsButtons: React.FC<Props> = ({ category, post }) => {
   useEffect(() => {
     const fetchIsBookmarked = async () => {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/bookmarks/${post.id}`,
-          {
-            method: "GET",
-            cache: "no-store",
-          }
-        );
+        const response = await fetch(`/api/bookmarks/${post.id}`, {
+          method: "GET",
+          cache: "no-store",
+        });
         const data = await response.json();
         if (response.ok) {
           setIsBookmarked(data.bookmarked);
@@ -56,7 +53,7 @@ const PostDetailsButtons: React.FC<Props> = ({ category, post }) => {
     if (status === "authenticated") {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/komunitas/${category}/${post.id}/like`,
+          `/api/komunitas/${category}/${post.id}/like`,
           {
             method: "POST",
           }
@@ -77,7 +74,7 @@ const PostDetailsButtons: React.FC<Props> = ({ category, post }) => {
     if (status === "authenticated") {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/komunitas/${category}/${post.id}/dislike`,
+          `/api/komunitas/${category}/${post.id}/dislike`,
           {
             method: "DELETE",
           }
@@ -96,12 +93,9 @@ const PostDetailsButtons: React.FC<Props> = ({ category, post }) => {
 
   const addBookmark = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/bookmarks/${post.id}`,
-        {
-          method: "POST",
-        }
-      );
+      const response = await fetch(`/api/bookmarks/${post.id}`, {
+        method: "POST",
+      });
       const data = await response.json();
       if (response.ok) {
         window.location.reload();

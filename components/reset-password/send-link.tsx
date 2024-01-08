@@ -37,18 +37,13 @@ const FirstStep = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/reset-password/send-link`,
-        {
-          method: "POST",
-          body: JSON.stringify(values),
-        }
-      );
+      const response = await fetch(`/api/auth/reset-password/send-link`, {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
       const data = await response.json();
       if (response.ok) {
-        console.log(
-          `${process.env.NEXT_PUBLIC_API_URL}/lupa-sandi/${data.token}`
-        );
+        console.log(`/lupa-sandi/${data.token}`);
         setSentLink(true);
       } else {
         console.log(data);

@@ -14,27 +14,21 @@ const ChangeProfileImage = () => {
       const file = files[0];
       const fileType = file.type.split("/")[1];
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/uploads`,
-          {
-            method: "POST",
-            body: JSON.stringify({ type: fileType }),
-          }
-        );
+        const response = await fetch(`/api/uploads`, {
+          method: "POST",
+          body: JSON.stringify({ type: fileType }),
+        });
         const data = await response.json();
         if (response.ok) {
           const { uploadUrl, key } = data;
           await axios.put(uploadUrl, file);
 
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/profile/picture`,
-            {
-              method: "PATCH",
-              body: JSON.stringify({
-                image: `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_URL}/${key}`,
-              }),
-            }
-          );
+          const response = await fetch(`/api/profile/picture`, {
+            method: "PATCH",
+            body: JSON.stringify({
+              image: `${process.env.NEXT_PUBLIC_AWS_S3_BUCKET_URL}/${key}`,
+            }),
+          });
           const d = await response.json();
           if (response.ok) {
             await update();

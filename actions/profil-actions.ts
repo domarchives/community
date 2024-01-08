@@ -46,9 +46,7 @@ export const fetchBookmarks = async (page: number) => {
 
 export const fetchKonsepSaya = async (returnType: string, page?: number) => {
   try {
-    const url = page
-      ? `${process.env.NEXT_PUBLIC_API_URL}/api/drafts?page=${page}`
-      : `${process.env.NEXT_PUBLIC_API_URL}/api/drafts`;
+    const url = page ? `/api/drafts?page=${page}` : `/api/drafts`;
     const response = await fetch(url, {
       method: "GET",
       cache: "no-store",

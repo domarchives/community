@@ -82,7 +82,7 @@ const CommentButtons = ({
     if (status === "authenticated") {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/${mainType}/${category}/${postId}/comments/${parent.id}`,
+          `/api/${mainType}/${category}/${postId}/comments/${parent.id}`,
           {
             method: "POST",
             body: JSON.stringify(values),
@@ -113,7 +113,7 @@ const CommentButtons = ({
           // parent dislike process
           try {
             const response = await fetch(
-              `${process.env.NEXT_PUBLIC_API_URL}/api/${mainType}/${category}/${postId}/comments/${commentId}/dislike`,
+              `/api/${mainType}/${category}/${postId}/comments/${commentId}/dislike`,
               {
                 method: "DELETE",
               }
@@ -131,7 +131,7 @@ const CommentButtons = ({
           // child like process
           try {
             const response = await fetch(
-              `${process.env.NEXT_PUBLIC_API_URL}/api/${mainType}/${category}/${postId}/comments/${commentId}/like`,
+              `/api/${mainType}/${category}/${postId}/comments/${commentId}/like`,
               {
                 method: "POST",
               }
@@ -154,7 +154,7 @@ const CommentButtons = ({
           // parent dislike process
           try {
             const response = await fetch(
-              `${process.env.NEXT_PUBLIC_API_URL}/api/${mainType}/${category}/${postId}/comments/${commentId}/dislike`,
+              `/api/${mainType}/${category}/${postId}/comments/${commentId}/dislike`,
               {
                 method: "DELETE",
               }
@@ -172,7 +172,7 @@ const CommentButtons = ({
           // parent like process
           try {
             const response = await fetch(
-              `${process.env.NEXT_PUBLIC_API_URL}/api/${mainType}/${category}/${postId}/comments/${commentId}/like`,
+              `/api/${mainType}/${category}/${postId}/comments/${commentId}/like`,
               {
                 method: "POST",
               }

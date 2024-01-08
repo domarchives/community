@@ -41,13 +41,10 @@ const ResetForm = ({ token }: Props) => {
       return alert("Passwords not match!");
     }
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/reset-password`,
-        {
-          method: "PATCH",
-          body: JSON.stringify({ ...values, token }),
-        }
-      );
+      const response = await fetch(`/api/auth/reset-password`, {
+        method: "PATCH",
+        body: JSON.stringify({ ...values, token }),
+      });
       const data = await response.json();
       if (response.ok) {
         form.reset();
