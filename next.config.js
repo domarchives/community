@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "kriptoklub.s3.ap-northeast-2.amazonaws.com",
+        hostname: "kitacommunity.s3.ap-northeast-2.amazonaws.com",
       },
       {
         protocol: "https",

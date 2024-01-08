@@ -35,7 +35,7 @@ const Footer = () => {
       <section className="max-w-7xl mx-auto p-10 pb-5">
         <div className="flex items-start justify-between pb-20 border-b border-status-inactive">
           <Image
-            src="/images/footer-logo.svg"
+            src="/images/kita.png"
             alt="Logo"
             width={142}
             height={26}
@@ -172,7 +172,7 @@ const Footer = () => {
                   Bantuan
                 </h3>
                 <p className="text-sm text-black font-medium leading-none">
-                  contact@kriptoklub.com
+                  official@kita.foundation
                 </p>
               </div>
               <div className="space-y-5">
@@ -206,7 +206,7 @@ const Footer = () => {
 
         <div className="h-8 flex items-end justify-between">
           <p className="text-sm text-main-dark font-medium leading-none">
-            2022 © Kripto Klub. All Rights Reserved
+            2024 © Kita Foundation. All Rights Reserved
           </p>
           <p className="flex items-center gap-x-2.5">
             <span className="text-sm text-main-dark font-medium leading-none">
