@@ -68,11 +68,11 @@ const HeaderMenuList = () => {
         ],
         subMenuHeight: "108px",
       },
-      {
-        label: "Informasi Pasar",
-        href: "/informasi-pasar",
-        active: pathname === "/informasi-pasar",
-      },
+      // {
+      //   label: "Informasi Pasar",
+      //   href: "/informasi-pasar",
+      //   active: pathname === "/informasi-pasar",
+      // },
     ],
     [pathname]
   );

@@ -42,7 +42,7 @@ const Footer = () => {
             priority
             className="object-contain"
           />
-          <ul className="w-[822px] flex items-start gap-x-[120px]">
+          <ul className="w-[822px] flex items-start justify-between">
             {/* Komunitas */}
             <li className="space-y-5">
               <h3>
@@ -136,7 +136,7 @@ const Footer = () => {
             </li>
 
             {/* Pasar */}
-            <li className="space-y-5">
+            {/* <li className="space-y-5">
               <h3>
                 <Link
                   href="/informasi-pasar"
@@ -163,7 +163,7 @@ const Footer = () => {
                   </Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
             {/* Bantuan & SNS */}
             <li className="space-y-10">
