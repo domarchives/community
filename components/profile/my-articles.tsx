@@ -24,14 +24,13 @@ import Ubah from "@/components/svg/ubah";
 import Hapus from "@/components/svg/hapus";
 import Pagination from "../pagination";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
-interface Props {
-  posts: any;
-  count: number;
-}
-
-const MyArticles = ({ posts, count }: Props) => {
+const MyArticles = () => {
   const { data: session } = useSession();
+
+  const [posts, setPosts] = useState<any>([]);
+  const [count, setCount] = useState<number>(0);
 
   const router = useRouter();
   const pathname = usePathname();
