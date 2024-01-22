@@ -366,7 +366,9 @@ export default function NewArticle() {
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Article posted! +2 KITA point</AlertDialogTitle>
+            <AlertDialogTitle className="text-center text-lg text-main-dark font-semibold mb-4">
+              Article posted! +2 KITA point
+            </AlertDialogTitle>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction asChild>
@@ -375,6 +377,7 @@ export default function NewArticle() {
                   setOpen(false);
                   router.push(pushURL);
                 }}
+                className="w-full bg-main-red hover:bg-main-red/90"
               >
                 Continue
               </Button>

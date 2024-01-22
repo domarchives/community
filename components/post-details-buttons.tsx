@@ -200,11 +200,18 @@ const PostDetailsButtons: React.FC<Props> = ({ category, post }) => {
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Liked a post! +1 KITA point</AlertDialogTitle>
+            <AlertDialogTitle className="text-center text-lg text-main-dark font-semibold mb-4">
+              Liked a post! +1 KITA point
+            </AlertDialogTitle>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction asChild>
-              <Button onClick={() => setOpen(false)}>Continue</Button>
+              <Button
+                onClick={() => setOpen(false)}
+                className="w-full bg-main-red hover:bg-main-red/90"
+              >
+                Continue
+              </Button>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

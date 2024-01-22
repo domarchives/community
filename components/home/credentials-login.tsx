@@ -148,7 +148,9 @@ const CredentialsLogin = () => {
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Daily bonus! +10 KITA point</AlertDialogTitle>
+            <AlertDialogTitle className="text-center text-lg text-main-dark font-semibold mb-4">
+              Daily bonus! +10 KITA point
+            </AlertDialogTitle>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction asChild>
@@ -157,6 +159,7 @@ const CredentialsLogin = () => {
                   setOpen(false);
                   router.refresh();
                 }}
+                className="w-full bg-main-red hover:bg-main-red/90"
               >
                 Continue
               </Button>
