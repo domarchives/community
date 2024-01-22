@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,6 +27,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Editor from "@/components/editor";
 import KonsepSaya from "./konsep-saya";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
 
 const formSchema = z.object({
   id: z.string().optional(),
@@ -81,6 +89,9 @@ const categories = [
 export default function NewArticle() {
   const { data: session, status } = useSession();
 
+  const [open, setOpen] = useState<boolean>(false);
+  const [pushURL, setPushURL] = useState<string>("");
+
   const router = useRouter();
 
   const quillRef = useRef<ReactQuill>(null);
@@ -105,10 +116,15 @@ export default function NewArticle() {
             userId: session.user.id,
           }),
         });
-        const { post } = await response.json();
+        const { post, point } = await response.json();
         if (response.ok) {
           form.reset();
-          router.push(`/komunitas/${post.category}/${post.id}`);
+          if (point > 0) {
+            setOpen(true);
+            setPushURL(`/komunitas/${post.category}/${post.id}`);
+          } else {
+            router.push(`/komunitas/${post.category}/${post.id}`);
+          }
         } else {
           return alert("error");
         }
@@ -220,7 +236,7 @@ export default function NewArticle() {
   );
 
   return (
-    <main className="max-w-7xl w-full h-full mx-auto py-5 px-10">
+    <main className="md:max-w-7xl w-full h-full mx-auto py-3 md:py-5 md:px-10">
       <section className="bg-white">
         <h2 className="h-[60px] px-6 text-base text-main-dark font-semibold leading-none flex items-center border-b border-main-grey">
           Tulis Artikel
@@ -229,7 +245,7 @@ export default function NewArticle() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="px-6 py-[22px]"
+            className="px-3 md:px-6 py-[22px]"
           >
             <div className="space-y-[14px] mb-10">
               <FormField
@@ -247,7 +263,7 @@ export default function NewArticle() {
                 control={form.control}
                 name="category"
                 render={({ field }) => (
-                  <FormItem className="max-w-[210px]">
+                  <FormItem className="max-w-full md:max-w-[210px]">
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl className="rounded-none border-status-inactive">
                         <SelectTrigger className="text-sm text-main-dark font-medium">
@@ -321,23 +337,23 @@ export default function NewArticle() {
                 )}
               />
             </div>
-            <div className="w-full flex items-center justify-between">
+            <div className="w-full flex flex-col md:flex-row items-center justify-between">
               <KonsepSaya
                 form={form}
                 router={router}
                 fetchKonsepSaya={fetchKonsepSaya}
               />
-              <div className="space-x-[14px]">
+              <div className="w-full md:w-fit md:space-x-[14px] space-y-2 md:space-y-0 mt-2 md:mt-0">
                 <Button
                   type="button"
                   onClick={createDraft}
-                  className="w-[220px] bg-white hover:bg-white border border-main-dark text-main-dark text-sm font-semibold"
+                  className="w-full md:w-[220px] bg-white hover:bg-white border border-main-dark text-main-dark text-sm font-semibold"
                 >
                   Simpan sebagai Konsep
                 </Button>
                 <Button
                   type="submit"
-                  className="w-[180px] bg-main-red hover:bg-main-red text-sm font-semibold"
+                  className="w-full md:w-[180px] bg-main-red hover:bg-main-red text-sm font-semibold"
                 >
                   Unggahan
                 </Button>
@@ -346,6 +362,26 @@ export default function NewArticle() {
           </form>
         </Form>
       </section>
+
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Article posted! +2 KITA point</AlertDialogTitle>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction asChild>
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                  router.push(pushURL);
+                }}
+              >
+                Continue
+              </Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </main>
   );
 }

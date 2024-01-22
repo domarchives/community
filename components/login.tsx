@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +18,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
+import { Button } from "./ui/button";
 
 const formSchema = z.object({
   email: z
@@ -26,6 +37,10 @@ const formSchema = z.object({
 });
 
 const Login = () => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,11 +50,29 @@ const Login = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await signIn("credentials", {
+    const response = await signIn("credentials", {
       email: values.email,
       password: values.password,
-      callbackUrl: "/",
+      redirect: false,
     });
+
+    if (response?.ok) {
+      try {
+        const res = await fetch("/api/auth/sign-in/point", {
+          method: "POST",
+        });
+        const data = await res.json();
+        const point = data.point;
+
+        if (point > 0) {
+          setOpen(true);
+        } else {
+          router.push("/");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   // const googleOAuthLogin = async () => {
@@ -51,16 +84,19 @@ const Login = () => {
   // };
 
   return (
-    <section className="my-[120px]">
-      <div className="max-w-[420px] mx-auto p-6 flex flex-col items-center justify-center">
+    <section className="my-[60px] md:my-[120px]">
+      <div className="w-full md:max-w-[420px] mx-auto p-5 md:p-6 flex flex-col items-center justify-center">
         <Image
           src="/images/kita.png"
           alt="Logo"
           width={236}
           height={68}
           priority
-          className="object-contain mb-11"
+          className="object-contain mb-11 hidden md:block"
         />
+        <h2 className="md:hidden mb-5 text-[32px] font-semibold text-main-dark">
+          Masuk
+        </h2>
         <div className="w-full">
           <Form {...form}>
             <form
@@ -177,6 +213,26 @@ const Login = () => {
           </button> */}
         </div>
       </div>
+
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Daily bonus! +10 KITA point</AlertDialogTitle>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction asChild>
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                  router.push("/");
+                }}
+              >
+                Continue
+              </Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </section>
   );
 };

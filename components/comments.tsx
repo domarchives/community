@@ -16,7 +16,7 @@ const Comments = async ({ mainType, category, postId }: Props) => {
   return (
     <div className="pt-[14px] space-y-[14px]">
       <section className="bg-white">
-        <div className="px-6 h-12 flex items-center border-b border-main-grey">
+        <div className="px-5 md:px-6 h-12 flex items-center border-b border-main-grey">
           <h3 className="text-sm text-main-dark font-semibold">Komentar</h3>
         </div>
         {session ? (
@@ -27,7 +27,7 @@ const Comments = async ({ mainType, category, postId }: Props) => {
             session={session}
           />
         ) : (
-          <div className="py-5 px-6 min-h-[120px] flex justify-center items-center">
+          <div className="py-5 px-5 md:px-6 min-h-[120px] flex justify-center items-center">
             <Link
               href="/masuk"
               className="h-10 w-[120px] flex justify-center items-center text-white text-sm font-semibold rounded-sm bg-brand-red"
@@ -38,7 +38,7 @@ const Comments = async ({ mainType, category, postId }: Props) => {
         )}
       </section>
       <section className="bg-white">
-        <div className="h-12 px-6 flex items-center border-b border-main-grey">
+        <div className="h-12 px-5 md:px-6 flex items-center border-b border-main-grey">
           <h3 className="flex items-center gap-x-1.5">
             <span className="text-sm text-main-red font-semibold">00</span>
             <span className="text-sm text-main-dark font-semibold">

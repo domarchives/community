@@ -18,7 +18,7 @@ const CommentList = async ({ mainType, category, postId }: Props) => {
     <ul>
       {comments.map((comment: any) => (
         <li key={`comment-${comment.id}`}>
-          <div className="min-h-[120px] px-6 py-5 flex justify-between gap-x-6 border-b border-main-grey">
+          <div className="min-h-[120px] px-5 md:px-6 py-5 flex justify-between gap-x-6 border-b border-main-grey">
             <div className="flex-1 flex items-start gap-x-[14px]">
               <div>
                 {comment.user.image ? (
@@ -67,13 +67,16 @@ const CommentList = async ({ mainType, category, postId }: Props) => {
                 />
               </div>
             </div>
-            <div>
+            {/* <div>
               <CommentMoreButton />
-            </div>
+            </div> */}
           </div>
           <ul>
             {comment.children.map((child: any) => (
-              <li key={`comment-children-${child.id}`} className="pl-[100px]">
+              <li
+                key={`comment-children-${child.id}`}
+                className="pl-[50px] md:pl-[100px]"
+              >
                 <div className="min-h-[120px] px-6 py-5 flex justify-between gap-x-6 border-b border-main-grey">
                   <div className="flex-1 flex items-start gap-x-[14px]">
                     <div>
@@ -97,7 +100,7 @@ const CommentList = async ({ mainType, category, postId }: Props) => {
                         />
                       )}
                     </div>
-                    <div className="h-full flex flex-col items-start justify-between">
+                    <div className="h-full flex flex-col items-start justify-between gap-y-3">
                       <div>
                         <div className="flex items-center gap-x-1.5 mb-3">
                           <span className="h-[14px] w-[17px] rounded-sm border border-main-red text-[10px] text-main-red font-semibold flex items-center justify-center">
@@ -110,7 +113,7 @@ const CommentList = async ({ mainType, category, postId }: Props) => {
                             {dayjs(child.createdAt).format("YYYY-MM-DD")}
                           </span>
                         </div>
-                        <p className="text-sm text-main-dark font-medium">
+                        <p className="max-w-[230px] md:max-w-full text-sm text-main-dark font-medium">
                           {child.body}
                         </p>
                       </div>
@@ -124,9 +127,9 @@ const CommentList = async ({ mainType, category, postId }: Props) => {
                       />
                     </div>
                   </div>
-                  <div>
+                  {/* <div>
                     <CommentMoreButton />
-                  </div>
+                  </div> */}
                 </div>
               </li>
             ))}

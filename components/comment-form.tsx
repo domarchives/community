@@ -57,7 +57,7 @@ const CommentForm = ({ mainType, category, postId, session }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="py-5 px-6 flex justify-between gap-x-6"
+        className="py-5 px-5 md:px-6 flex justify-between gap-x-6"
       >
         <div className="flex-1 space-y-2.5">
           <div className="flex items-center gap-x-1.5">

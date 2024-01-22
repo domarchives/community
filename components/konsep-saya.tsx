@@ -64,7 +64,7 @@ const KonsepSaya = ({ form, router, fetchKonsepSaya }: Props) => {
       <AlertDialogTrigger asChild>
         <Button
           type="button"
-          className="w-[180px] bg-white hover:bg-white border border-main-dark text-main-dark text-sm font-semibold space-x-1"
+          className="w-full md:w-[180px] bg-white hover:bg-white border border-main-dark text-main-dark text-sm font-semibold space-x-1"
           disabled={drafts?.length < 1}
         >
           <span>Konsep Saya</span>

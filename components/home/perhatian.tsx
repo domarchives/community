@@ -11,10 +11,10 @@ const Perhatian = async () => {
         <Link
           href={`/perhatian/${perhatian.id}`}
           key={`perhatian-${perhatian.id}`}
-          className="h-10 px-5 py-2.5 border-b border-brand-gray last:border-b-0 flex items-center gap-x-3 group"
+          className="h-12 md:h-10 px-5 md:py-2.5 border-b border-brand-gray last:border-b-0 flex items-center gap-x-3 group"
         >
           <h3 className="text-brand-red text-sm font-semibold">Perhatian</h3>
-          <p className="max-w-[304px] truncate text-xs text-brand-dark font-medium group-hover:underline underline-offset-2">
+          <p className="max-w-[200px] md:max-w-[304px] truncate text-xs text-brand-dark font-medium group-hover:underline underline-offset-2">
             {perhatian.title}
           </p>
         </Link>

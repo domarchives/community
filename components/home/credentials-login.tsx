@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,6 +11,14 @@ import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "../ui/alert-dialog";
 
 const formSchema = z.object({
   email: z.string().min(1),
@@ -17,6 +26,10 @@ const formSchema = z.object({
 });
 
 const CredentialsLogin = () => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -26,13 +39,27 @@ const CredentialsLogin = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await signIn("credentials", {
-        ...values,
-        callbackUrl: "/",
-      });
-    } catch (error) {
-      console.log("sign-in error: ", error);
+    const response = await signIn("credentials", {
+      ...values,
+      redirect: false,
+    });
+
+    if (response?.ok) {
+      try {
+        const res = await fetch("/api/auth/sign-in/point", {
+          method: "POST",
+        });
+        const data = await res.json();
+        const point = data.point;
+
+        if (point > 0) {
+          setOpen(true);
+        } else {
+          router.refresh();
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -117,6 +144,26 @@ const CredentialsLogin = () => {
           Google
         </span>
       </Button> */}
+
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Daily bonus! +10 KITA point</AlertDialogTitle>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction asChild>
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                  router.refresh();
+                }}
+              >
+                Continue
+              </Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </section>
   );
 };

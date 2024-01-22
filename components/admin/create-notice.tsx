@@ -121,7 +121,7 @@ const CreateNotice = () => {
   );
 
   return (
-    <div className="max-w-7xl w-full h-full mx-auto py-5 px-10">
+    <div className="w-full md:max-w-7xl h-full mx-auto py-3 md:py-5 md:px-10">
       <section className="bg-white">
         <h2 className="h-[60px] px-6 text-base text-main-dark font-semibold leading-none flex items-center border-b border-main-grey">
           Perhatian
@@ -171,7 +171,7 @@ const CreateNotice = () => {
             <div className="flex justify-end">
               <Button
                 type="submit"
-                className="w-[180px] bg-main-red hover:bg-main-red text-sm font-semibold"
+                className="w-full md:w-[180px] bg-main-red hover:bg-main-red text-sm font-semibold"
               >
                 Unggahan
               </Button>

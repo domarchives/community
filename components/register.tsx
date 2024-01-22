@@ -75,16 +75,19 @@ const Register = () => {
   };
 
   return (
-    <section className="my-[120px]">
-      <div className="max-w-[420px] mx-auto p-6 flex flex-col items-center justify-center">
+    <section className="my-[60px] md:my-[120px]">
+      <div className="w-full md:max-w-[420px] mx-auto p-5 md:p-6 flex flex-col items-center justify-center">
         <Image
           src="/images/kita.png"
           alt="Logo"
           width={236}
           height={68}
           priority
-          className="object-contain mb-10"
+          className="object-contain mb-10 hidden md:block"
         />
+        <h2 className="md:hidden mb-5 text-[32px] font-semibold text-main-dark">
+          Daftar
+        </h2>
         <div className="w-full">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">

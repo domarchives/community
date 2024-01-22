@@ -62,14 +62,14 @@ const ChangePassword = () => {
       <div className="h-[60px] w-full px-6 border-b border-brand-gray flex items-center gap-x-[14px] pb-2.5">
         <h2
           onClick={() => router.push("/profil-saya")}
-          className="text-base text-brand-inactive font-semibold hover:text-brand-dark transition-colors cursor-pointer"
+          className="text-sm md:text-base text-brand-inactive font-semibold hover:text-brand-dark transition-colors cursor-pointer"
         >
           Ubah Profil
         </h2>
         <div className="w-[1px] h-5 bg-brand-subgray" />
         <h2
           onClick={() => router.push("/profil-saya/ubah-sandi")}
-          className="text-base text-brand-dark font-semibold hover:text-brand-dark transition-colors cursor-pointer"
+          className="text-sm md:text-base text-brand-dark font-semibold hover:text-brand-dark transition-colors cursor-pointer"
         >
           Ubah Sandi
         </h2>

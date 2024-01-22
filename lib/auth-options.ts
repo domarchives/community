@@ -33,24 +33,6 @@ const authOptions: NextAuthOptions = {
         if (!credentials || !credentials.email || !credentials.password) {
           return null;
         }
-        // try {
-        //   const response = await fetch(
-        //     `${process.env.NEXTAUTH_URL}/api/auth/sign-in`,
-        //     {
-        //       method: "POST",
-        //       body: JSON.stringify(credentials),
-        //     }
-        //   );
-        //   if (response.ok) {
-        //     const { user } = await response.json();
-        //     return user;
-        //   } else {
-        //     return null;
-        //   }
-        // } catch (error) {
-        //   console.log(error);
-        //   return null;
-        // }
 
         try {
           const user = await db.user.findUnique({
@@ -95,24 +77,6 @@ const authOptions: NextAuthOptions = {
     signIn: "/masuk",
   },
   callbacks: {
-    // async signIn({ user }) {
-    //   try {
-    //     const response = await fetch(
-    //       `${process.env.NEXTAUTH_URL}/api/auth/google`,
-    //       {
-    //         method: "POST",
-    //         body: JSON.stringify(user),
-    //       }
-    //     );
-    //     if (response.ok) {
-    //       return true;
-    //     } else {
-    //       return false;
-    //     }
-    //   } catch (error) {
-    //     return false;
-    //   }
-    // },
     async jwt({ token }) {
       const user = await db.user.findUnique({
         where: {
@@ -129,6 +93,8 @@ const authOptions: NextAuthOptions = {
           referralCode: user.referralCode,
           provider: user.provider,
           role: user.role,
+          address: user.address,
+          network: user.network,
         };
       }
       return token;
@@ -145,6 +111,8 @@ const authOptions: NextAuthOptions = {
             referralCode: token.referralCode,
             provider: token.provider,
             role: token.role,
+            address: token.address,
+            network: token.network,
           },
         };
       }

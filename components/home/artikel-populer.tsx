@@ -9,13 +9,13 @@ const ArtikelPopuler = async () => {
   const { posts } = await fetchKomunitasArtikelPopuler();
 
   return (
-    <section className="w-[766px] bg-brand-white">
-      <div className="h-[60px] w-full flex items-center border-b border-brand-gray px-6">
-        <h2 className="text-base text-brand-dark font-semibold">
+    <section className="w-full md:w-[766px] bg-brand-white">
+      <div className="h-12 md:h-[60px] w-full flex items-center border-b border-brand-gray px-5 md:px-6">
+        <h2 className="text-sm md:text-base text-brand-dark font-semibold">
           Artikel Populer
         </h2>
       </div>
-      <div className="grid grid-rows-5 grid-flow-col">
+      <div className="grid md:grid-rows-5 md:grid-flow-col">
         {posts.map((post: any, index: number) => {
           const hasThumb = typeof getThumb(post.body) === "string";
           return (
@@ -23,7 +23,7 @@ const ArtikelPopuler = async () => {
               key={`artikel-populer-${post.id}`}
               href={`/komunitas/${post.category}/${post.id}`}
               className={cn(
-                "h-[60px] min-w-[372.5px] px-5 py-2.5 flex items-center gap-3 border-b border-brand-gray group",
+                "h-[60px] min-w-[316px] md:min-w-[372.5px] px-5 py-2.5 flex items-center gap-3 border-b border-brand-gray group",
                 index < 5 && "border-r border-brand-gray"
               )}
             >
@@ -42,7 +42,7 @@ const ArtikelPopuler = async () => {
                 </div>
               )}
               <div className="flex-grow flex items-center justify-between">
-                <p className="max-w-[207.5px] truncate text-sm text-brand-dark font-medium group-hover:text-brand-red transition-colors">
+                <p className="max-w-[200px] md:max-w-[207.5px] truncate text-sm text-brand-dark font-medium group-hover:text-brand-red transition-colors">
                   {post.title}
                 </p>
                 <div className="flex items-center">

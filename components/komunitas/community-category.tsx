@@ -22,10 +22,10 @@ const CommunityCategory: React.FC<Props> = async ({ category, page }) => {
   );
 
   return (
-    <section className="w-[766px] bg-brand-white">
-      <div className="h-[60px] px-6 flex flex-col items-start justify-center gap-y-1.5 border-b border-brand-gray">
+    <section className="w-full md:w-[766px] bg-brand-white">
+      <div className="h-12 md:h-[60px] px-6 flex flex-col items-start justify-center gap-y-1.5 border-b border-brand-gray">
         <h2 className="text-base text-brand-dark font-semibold leading-none">
-          Community Category
+          Komunitas
         </h2>
         <p className="text-xs text-brand-inactive font-medium leading-none capitalize">
           {category.split("-").join(" ")}
@@ -42,7 +42,7 @@ const CommunityCategory: React.FC<Props> = async ({ category, page }) => {
                 href={`/perhatian/${perhatian.id}`}
                 className="flex items-center gap-x-2.5"
               >
-                <h3 className="text-base text-brand-red font-semibold">
+                <h3 className="text-sm md:text-base text-brand-red font-semibold">
                   Perhatian
                 </h3>
                 <div className="w-full flex items-center justify-between">
@@ -68,23 +68,34 @@ const CommunityCategory: React.FC<Props> = async ({ category, page }) => {
             <Link
               href={`/komunitas/${category}/${post.id}`}
               key={post.id}
-              className="h-[74px] flex px-6 py-2.5 border-b border-brand-gray last:border-b-0 group"
+              className="h-[60px] md:h-[74px] flex px-6 py-2.5 border-b border-brand-gray last:border-b-0 group"
             >
               <div className="flex items-center gap-x-2.5">
                 {hasThumb && (
-                  <div className="h-[54px] w-[54px] rounded-md bg-brand-subgray overflow-hidden">
-                    <Image
-                      src={getThumb(post.body) || ""}
-                      alt="Thumbnail"
-                      width={54}
-                      height={54}
-                      className="h-[54px] w-[54px] object-cover"
-                    />
-                  </div>
+                  <>
+                    <div className="hidden md:block h-[54px] w-[54px] rounded-md bg-brand-subgray overflow-hidden">
+                      <Image
+                        src={getThumb(post.body) || ""}
+                        alt="Thumbnail"
+                        width={54}
+                        height={54}
+                        className="h-[54px] w-[54px] object-cover"
+                      />
+                    </div>
+                    <div className="md:hidden h-[40px] w-[40px] rounded-md bg-brand-subgray overflow-hidden">
+                      <Image
+                        src={getThumb(post.body) || ""}
+                        alt="Thumbnail"
+                        width={40}
+                        height={40}
+                        className="h-[40px] w-[40px] object-cover"
+                      />
+                    </div>
+                  </>
                 )}
-                <div className="space-y-2.5">
+                <div className="space-y-1.5 md:space-y-2.5">
                   <div className="flex items-center gap-x-1.5">
-                    <p className="text-sm text-brand-dark font-medium max-w-[378px] truncate group-hover:text-brand-red transition-colors">
+                    <p className="text-sm text-brand-dark font-medium max-w-[250px] md:max-w-[378px] truncate group-hover:text-brand-red transition-colors">
                       {post.title}
                     </p>
                     <span className="text-sm text-brand-blue font-medium mr-1">
@@ -97,16 +108,16 @@ const CommunityCategory: React.FC<Props> = async ({ category, page }) => {
                     <HottestMd />
                   </div>
                   <div className="flex items-center gap-2.5">
-                    <span className="text-xs text-brand-dark font-medium">
+                    <span className="text-[10px] md:text-xs text-brand-dark font-medium">
                       {post.user.name}
                     </span>
-                    <span className="text-xs text-brand-inactive font-medium capitalize">
+                    <span className="text-[10px] md:text-xs text-brand-inactive font-medium capitalize">
                       {post.category.split("-").join(" ")}
                     </span>
-                    <span className="text-xs text-brand-inactive font-medium">
+                    <span className="text-[10px] md:text-xs text-brand-inactive font-medium">
                       Apresiasi {post._count.likes}
                     </span>
-                    <span className="text-xs text-brand-inactive font-medium">
+                    <span className="text-[10px] md:text-xs text-brand-inactive font-medium">
                       {dayjs().to(dayjs(`${post.createdAt}`))}
                     </span>
                   </div>

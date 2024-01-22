@@ -14,7 +14,7 @@ interface Props {
 
 const NoticeDetails = ({ perhatian }: Props) => {
   return (
-    <div className="max-w-7xl mx-auto py-5 px-10 flex items-start gap-x-[14px]">
+    <div className="w-full md:max-w-7xl mx-auto py-3 md:py-5 md:px-10 flex items-start gap-x-[14px]">
       <section className="flex-1">
         {/* Post */}
         <div className="bg-white">
@@ -48,13 +48,13 @@ const NoticeDetails = ({ perhatian }: Props) => {
               </div>
             </div>
           </div>
-          <article className="p-6">
+          <article className="p-6 w-full">
             <h1 className="mb-[30px] article-title">{perhatian.title}</h1>
             <div className="mb-20 article-body">{parse(perhatian.body)}</div>
           </article>
         </div>
       </section>
-      <section className="w-[420px]">
+      <section className="hidden md:block w-[420px]">
         <SideBanner />
         <Perhatian />
       </section>

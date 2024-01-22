@@ -19,7 +19,7 @@ interface Props {
 
 const BeritaDetails = ({ category, post }: Props) => {
   return (
-    <div className="max-w-7xl mx-auto py-5 px-10 flex items-start gap-x-[14px]">
+    <div className="w-full md:max-w-7xl mx-auto py-3 md:py-5 md:px-10 flex items-start md:gap-x-[14px]">
       <section className="flex-1">
         {/* Post */}
         <div className="bg-white">
@@ -32,7 +32,7 @@ const BeritaDetails = ({ category, post }: Props) => {
               {category?.split("-").join(" ")}
             </span>
           </div>
-          <div className="h-20 p-6 flex items-center justify-between border-b border-brand-gray">
+          <div className="md:h-20 p-6 flex flex-col md:flex-row items-start md:items-center justify-between border-b border-brand-gray gap-y-6 md:gap-y-0">
             <div className="flex items-center gap-x-2.5">
               <Image
                 src={
@@ -76,16 +76,16 @@ const BeritaDetails = ({ category, post }: Props) => {
               </div>
             </div>
           </div>
-          <article className="p-6 pb-0">
+          <article className="p-6 pb-0 w-full">
             <h1 className="mb-[30px] article-title">{post.title}</h1>
-            <div className="mb-20 article-body">{parse(post.body)}</div>
+            <div className="mb-20 article-body w-full">{parse(post.body)}</div>
           </article>
 
           <BeritaDetailsButtons category={category} post={post} />
         </div>
         <Comments mainType="berita" category={category} postId={post.id} />
       </section>
-      <section className="w-[420px]">
+      <section className="hidden md:block w-[420px]">
         <SideBanner />
         <Perhatian />
       </section>

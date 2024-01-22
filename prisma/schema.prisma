@@ -14,6 +14,8 @@ model User {
   password     String?
   image        String?
   referralCode String?
+  address      String?
+  network      String?
   status       Boolean  @default(true)
   provider     String   @default("KRIPTOKLUB") // KRIPTOKLUB or GOOGLE
   role         String   @default("USER") // USER or ADMIN
@@ -27,6 +29,7 @@ model User {
   bookmarks           Bookmark[]
   accountCancellation AccountCancellation?
   perhatians          Perhatian[]
+  points              Point[]
 }
 
 model Post {
@@ -64,11 +67,12 @@ model Comment {
 }
 
 model PostLike {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  userId String @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  postId String @db.ObjectId
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId    String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 }
 
 model CommentLike {
@@ -127,4 +131,14 @@ model CoinRanking {
   price     String
   change    String
   rank      Int
+}
+
+model Point {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  category  String // DAILY_LOGIN / ARTICLE_POST / LIKED_POST
+  amount    Int
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

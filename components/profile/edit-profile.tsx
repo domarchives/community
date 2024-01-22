@@ -90,26 +90,26 @@ const EditProfile = () => {
       <div className="h-[60px] w-full px-6 border-b border-brand-gray flex items-center gap-x-[14px] pb-2.5">
         <h2
           onClick={() => router.push("/profil-saya")}
-          className="text-base text-brand-dark font-semibold hover:text-brand-dark transition-colors cursor-pointer"
+          className="text-sm md:text-base text-brand-dark font-semibold hover:text-brand-dark transition-colors cursor-pointer"
         >
           Ubah Profil
         </h2>
         <div className="w-[1px] h-5 bg-brand-subgray" />
         <h2
           onClick={() => router.push("/profil-saya/ubah-sandi")}
-          className="text-base text-brand-inactive font-semibold hover:text-brand-dark transition-colors cursor-pointer"
+          className="text-sm md:text-base text-brand-inactive font-semibold hover:text-brand-dark transition-colors cursor-pointer"
         >
           Ubah Sandi
         </h2>
       </div>
 
-      <div className="py-8 px-6">
+      <div className="py-8 px-5 md:px-6">
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-              <div className="flex items-center gap-x-5 mb-[60px]">
+              <div className="flex flex-col md:flex-row items-center gap-x-5 mb-[60px] space-y-5 md:space-y-0">
                 <ChangeProfileImage />
-                <div className="p-3 bg-brand-gray rounded-sm overflow-hidden">
+                <div className="p-3 bg-brand-gray rounded-sm overflow-hidden w-full md:w-fit">
                   <ul className="list-disc space-y-3 pl-6 text-sm text-brand-dark font-medium">
                     <li>Up to 100mb</li>
                     <li>File types: .png, .jpg, .jpeg, .svg, .gif</li>

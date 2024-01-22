@@ -27,6 +27,7 @@ import Ubah from "@/components/svg/ubah";
 import Hapus from "@/components/svg/hapus";
 import Next from "@/components/svg/next";
 import Prev from "@/components/svg/prev";
+import HottestSm from "../svg/hottest-sm";
 
 interface Props {
   page: number;
@@ -83,11 +84,11 @@ const MyArticles = ({ page }: Props) => {
 
   return (
     <div className="bg-white">
-      <div className="h-[60px] border-b border-brand-gray px-6 flex items-center gap-x-3 mb-2.5">
+      <div className="h-[60px] border-b border-brand-gray px-5 md:px-6 flex items-center justify-between md:justify-start gap-x-3 mb-2.5">
         <h2
           onClick={() => router.push("/profil-saya/artikel-saya")}
           className={cn(
-            "text-brand-inactive text-base font-semibold leading-none hover:text-brand-dark transition-colors cursor-pointer",
+            "text-brand-inactive text-sm md:text-base text-center md:text-start font-semibold leading-none hover:text-brand-dark transition-colors cursor-pointer",
             pathname.includes("artikel-saya") && "text-brand-dark"
           )}
         >
@@ -97,7 +98,7 @@ const MyArticles = ({ page }: Props) => {
         <h2
           onClick={() => router.push("/profil-saya/penanda")}
           className={cn(
-            "text-brand-inactive text-base font-semibold leading-none hover:text-brand-dark transition-colors cursor-pointer",
+            "text-brand-inactive text-sm md:text-base text-center md:text-start font-semibold leading-none hover:text-brand-dark transition-colors cursor-pointer",
             pathname.includes("penanda") && "text-brand-dark"
           )}
         >
@@ -107,7 +108,7 @@ const MyArticles = ({ page }: Props) => {
         <h2
           onClick={() => router.push("/profil-saya/konsep-saya")}
           className={cn(
-            "text-brand-inactive text-base font-semibold leading-none hover:text-brand-dark transition-colors cursor-pointer",
+            "text-brand-inactive text-sm md:text-base text-center md:text-start font-semibold leading-none hover:text-brand-dark transition-colors cursor-pointer",
             pathname.includes("konsep-saya") && "text-brand-dark"
           )}
         >
@@ -119,7 +120,7 @@ const MyArticles = ({ page }: Props) => {
             <h2
               onClick={() => router.push("/profil-saya/perhatian-saya")}
               className={cn(
-                "text-brand-inactive text-base font-semibold leading-none hover:text-brand-dark transition-colors cursor-pointer",
+                "text-brand-inactive text-sm md:text-base text-center md:text-start font-semibold leading-none hover:text-brand-dark transition-colors cursor-pointer",
                 pathname.includes("perhatian-saya") && "text-brand-dark"
               )}
             >
@@ -137,7 +138,7 @@ const MyArticles = ({ page }: Props) => {
             return (
               <li
                 key={`my-articles-${post.id}`}
-                className="h-[75px] px-6 border-b border-brand-gray last:border-b-0 flex items-center justify-between"
+                className="h-[60px] md:h-[75px] px-5 md:px-6 border-b border-brand-gray last:border-b-0 flex items-center justify-between"
               >
                 <Link
                   href={`/${isNews ? "berita" : "komunitas"}/${post.category}/${
@@ -146,19 +147,30 @@ const MyArticles = ({ page }: Props) => {
                   className="w-full h-full flex items-center gap-x-2.5 group"
                 >
                   {hasThumb && (
-                    <div className="h-[54px] w-[54px] rounded-md bg-brand-subgray overflow-hidden">
-                      <Image
-                        src={getThumb(post.body) || ""}
-                        alt="Thumbnail"
-                        width={54}
-                        height={54}
-                        className="h-[54px] w-[54px] object-cover"
-                      />
-                    </div>
+                    <>
+                      <div className="hidden md:block h-[54px] w-[54px] rounded-md bg-brand-subgray overflow-hidden">
+                        <Image
+                          src={getThumb(post.body) || ""}
+                          alt="Thumbnail"
+                          width={54}
+                          height={54}
+                          className="h-[54px] w-[54px] object-cover"
+                        />
+                      </div>
+                      <div className="block md:hidden h-[40px] w-[40px] rounded-md bg-brand-subgray overflow-hidden">
+                        <Image
+                          src={getThumb(post.body) || ""}
+                          alt="Thumbnail"
+                          width={40}
+                          height={40}
+                          className="h-[40px] w-[40px] object-cover"
+                        />
+                      </div>
+                    </>
                   )}
                   <div className="space-y-2">
                     <div className="flex items-center gap-x-1.5">
-                      <p className="max-w-[400px] truncate text-sm text-brand-dark font-medium group-hover:text-brand-red transition-colors">
+                      <p className="max-w-[200px] md:max-w-[400px] truncate text-sm text-brand-dark font-medium group-hover:text-brand-red transition-colors">
                         {post.title}
                       </p>
                       <span className="text-sm text-brand-blue font-medium leading-none">
@@ -168,19 +180,24 @@ const MyArticles = ({ page }: Props) => {
                           : post._count.comments}
                         )
                       </span>
-                      <HottestMd />
+                      <span className="hidden md:block">
+                        <HottestMd />
+                      </span>
+                      <span className="md:hidden">
+                        <HottestSm />
+                      </span>
                     </div>
-                    <div className="flex items-center gap-x-2.5">
-                      <span className="text-xs text-brand-dark font-semibold leading-none">
+                    <div className="flex items-center gap-x-1.5 md:gap-x-2.5">
+                      <span className="text-[10px] md:text-xs text-brand-dark font-semibold leading-none">
                         {post.user.name}
                       </span>
-                      <span className="text-xs text-brand-inactive font-medium leading-none">
+                      <span className="text-[10px] md:text-xs text-brand-inactive font-medium leading-none">
                         {post.category}
                       </span>
-                      <span className="text-xs text-brand-inactive font-medium leading-none">
+                      <span className="text-[10px] md:text-xs text-brand-inactive font-medium leading-none">
                         Apresiasi {post._count.likes}
                       </span>
-                      <span className="text-xs text-brand-inactive font-medium leading-none">
+                      <span className="text-[10px] md:text-xs text-brand-inactive font-medium leading-none">
                         {dayjs(post.createdAt).format("YYYY-MM-DD")}
                       </span>
                     </div>

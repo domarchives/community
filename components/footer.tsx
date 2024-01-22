@@ -32,17 +32,17 @@ const snsList = [
 const Footer = () => {
   return (
     <footer className="bg-white">
-      <section className="max-w-7xl mx-auto p-10 pb-5">
-        <div className="flex items-start justify-between pb-20 border-b border-status-inactive">
+      <section className="w-full md:max-w-7xl mx-auto p-10 pb-[60px] md:pb-5">
+        <div className="flex flex-col md:flex-row items-start justify-between md:pb-20 border-b border-status-inactive">
           <Image
             src="/images/kita.png"
             alt="Logo"
             width={142}
             height={26}
             priority
-            className="object-contain"
+            className="object-contain self-center md:self-start"
           />
-          <ul className="w-[822px] flex items-start justify-between">
+          <ul className="w-full md:w-[822px] flex flex-col md:flex-row items-center md:items-start justify-between py-10 md:py-0 text-center md:text-start gap-y-[50px] md:gap-y-0">
             {/* Komunitas */}
             <li className="space-y-5">
               <h3>
@@ -135,38 +135,8 @@ const Footer = () => {
               </ul>
             </li>
 
-            {/* Pasar */}
-            {/* <li className="space-y-5">
-              <h3>
-                <Link
-                  href="/informasi-pasar"
-                  className="text-base text-black font-semibold leading-none"
-                >
-                  Pasar
-                </Link>
-              </h3>
-              <ul className="space-y-5">
-                <li>
-                  <Link
-                    href="/informasi-pasar/koin"
-                    className="text-sm text-black font-medium leading-none"
-                  >
-                    Koin
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/informasi-pasar/pertukaran"
-                    className="text-sm text-black font-medium leading-none"
-                  >
-                    Pertukaran
-                  </Link>
-                </li>
-              </ul>
-            </li> */}
-
             {/* Bantuan & SNS */}
-            <li className="space-y-10">
+            <li className="space-y-[50px] md:space-y-10">
               <div className="space-y-5">
                 <h3 className="text-base text-black font-semibold leading-none">
                   Bantuan
@@ -204,11 +174,11 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="h-8 flex items-end justify-between">
-          <p className="text-sm text-main-dark font-medium leading-none">
+        <div className="h-fit md:h-8 flex flex-col-reverse md:flex-row items-center md:items-end justify-between">
+          <p className="text-sm text-main-dark font-medium leading-none pt-[18px] md:pt-0">
             2024 © Kita Foundation. All Rights Reserved
           </p>
-          <p className="flex items-center gap-x-2.5">
+          <p className="flex items-center gap-x-2.5 pt-[18px] md:pt-0">
             <span className="text-sm text-main-dark font-medium leading-none">
               Ketentuan Layanan
             </span>

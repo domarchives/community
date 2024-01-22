@@ -8,7 +8,7 @@ const Sidebar = async () => {
   const session = await getSessionUser();
 
   return (
-    <div className="space-y-[14px] w-[280px]">
+    <div className="space-y-2 md:space-y-[14px] md:w-[280px] bg-white md:bg-transparent">
       <div className="bg-brand-white rounded-md p-6 flex flex-col items-center justify-center">
         <Avatar className="w-[100px] h-[100px] mb-5">
           <AvatarImage
@@ -26,7 +26,7 @@ const Sidebar = async () => {
             1
           </div>
           <p className="text-base text-brand-dark font-semibold leading-none">
-            Username
+            {session?.user.name}
           </p>
         </div>
 
@@ -69,20 +69,32 @@ const Sidebar = async () => {
       </div>
 
       <Link
+        href="/profil-saya/dompetku"
+        className="h-10 w-full border border-brand-dark rounded-none md:rounded-sm flex justify-center items-center text-sm text-brand-dark font-medium hover:bg-brand-dark hover:text-brand-white transition-colors"
+      >
+        Dompetku
+      </Link>
+      <Link
+        href="/profil-saya/histori-transaksi"
+        className="h-10 w-full border border-brand-dark rounded-none md:rounded-sm flex justify-center items-center text-sm text-brand-dark font-medium hover:bg-brand-dark hover:text-brand-white transition-colors"
+      >
+        Histori Transaksi
+      </Link>
+      <Link
         href="/profil-saya"
-        className="h-10 w-full border border-brand-dark rounded-sm flex justify-center items-center text-sm text-brand-dark font-medium hover:bg-brand-dark hover:text-brand-white transition-colors"
+        className="h-10 w-full border border-brand-dark rounded-none md:rounded-sm flex justify-center items-center text-sm text-brand-dark font-medium hover:bg-brand-dark hover:text-brand-white transition-colors"
       >
         Ubah Profil
       </Link>
       <Link
         href="/profil-saya/artikel-saya"
-        className="h-10 w-full border border-brand-dark rounded-sm flex justify-center items-center text-sm text-brand-dark font-medium hover:bg-brand-dark hover:text-brand-white transition-colors"
+        className="h-10 w-full border border-brand-dark rounded-none md:rounded-sm flex justify-center items-center text-sm text-brand-dark font-medium hover:bg-brand-dark hover:text-brand-white transition-colors"
       >
         Artikel Saya
       </Link>
       <Link
         href="/tulis-artikel"
-        className="h-10 w-full border border-brand-red bg-brand-red rounded-sm flex justify-center items-center text-sm text-brand-white font-medium hover:bg-brand-red/80 transition-colors"
+        className="h-10 w-full border border-brand-red bg-brand-red rounded-none md:rounded-sm flex justify-center items-center text-sm text-brand-white font-medium hover:bg-brand-red/80 transition-colors"
       >
         Tulis Artikel
       </Link>

@@ -110,11 +110,11 @@ const BeritaDetailsButtons: React.FC<Props> = ({ category, post }) => {
   };
 
   return (
-    <div className="p-6 flex items-center justify-between">
+    <div className="p-5 md:p-6 flex items-center justify-between gap-x-5 md:gap-x-0">
       {disabled ? (
         <Button
           variant="outline"
-          className="flex items-center gap-x-1.5"
+          className="flex items-center gap-x-1.5 w-full md:w-fit"
           onClick={handlePostDislike}
           disabled={status !== "authenticated"}
         >
@@ -131,7 +131,7 @@ const BeritaDetailsButtons: React.FC<Props> = ({ category, post }) => {
       ) : (
         <Button
           variant="outline"
-          className="flex items-center gap-x-1.5"
+          className="flex items-center gap-x-1.5 w-full md:w-fit"
           onClick={handlePostLike}
           disabled={status !== "authenticated" || disabled}
         >
@@ -146,44 +146,26 @@ const BeritaDetailsButtons: React.FC<Props> = ({ category, post }) => {
           </div>
         </Button>
       )}
-      <div className="flex items-center gap-x-3">
-        <Button
-          variant="outline"
-          onClick={
-            status === "authenticated"
-              ? () => addBookmark()
-              : () => router.push("/masuk")
-          }
-          disabled={status !== "authenticated"}
-          className="flex items-center gap-x-1.5 w-[100px]"
+      <Button
+        variant="outline"
+        onClick={
+          status === "authenticated"
+            ? () => addBookmark()
+            : () => router.push("/masuk")
+        }
+        disabled={status !== "authenticated"}
+        className="flex items-center gap-x-1.5 w-full md:w-[100px]"
+      >
+        <Tandai color={isBookmarked ? "#FF6975" : "#525252"} />
+        <span
+          className={cn(
+            "text-xs text-brand-dark font-semibold",
+            isBookmarked && "text-brand-red"
+          )}
         >
-          <Tandai color={isBookmarked ? "#FF6975" : "#525252"} />
-          <span
-            className={cn(
-              "text-xs text-brand-dark font-semibold",
-              isBookmarked && "text-brand-red"
-            )}
-          >
-            Tandai
-          </span>
-        </Button>
-        <Button
-          variant="outline"
-          className="flex items-center gap-x-1.5 w-[100px]"
-        >
-          <Bagikan />
-          <span className="text-xs text-brand-dark font-semibold">Bagikan</span>
-        </Button>
-        <Button
-          variant="outline"
-          className="flex items-center gap-x-1.5 w-[100px]"
-        >
-          <Laporkan />
-          <span className="text-xs text-brand-dark font-semibold">
-            Laporkan
-          </span>
-        </Button>
-      </div>
+          Tandai
+        </span>
+      </Button>
     </div>
   );
 };

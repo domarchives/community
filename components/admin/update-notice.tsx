@@ -128,7 +128,7 @@ const UpdateNotice = ({ perhatian }: Props) => {
   );
 
   return (
-    <div className="max-w-7xl w-full h-full mx-auto py-5 px-10">
+    <div className="md:max-w-7xl w-full h-full mx-auto py-3 md:py-5 md:px-10">
       <section className="bg-white">
         <h2 className="h-[60px] px-6 text-base text-main-dark font-semibold leading-none flex items-center border-b border-main-grey">
           Perhatian
@@ -137,7 +137,7 @@ const UpdateNotice = ({ perhatian }: Props) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="px-6 py-[22px]"
+            className="px-5 md:px-6 py-[22px]"
           >
             <div className="space-y-[14px] mb-10">
               <FormField
@@ -178,7 +178,7 @@ const UpdateNotice = ({ perhatian }: Props) => {
             <div className="flex justify-end">
               <Button
                 type="submit"
-                className="w-[180px] bg-main-red hover:bg-main-red text-sm font-semibold"
+                className="w-full md:w-[180px] bg-main-red hover:bg-main-red text-sm font-semibold"
               >
                 Unggahan
               </Button>

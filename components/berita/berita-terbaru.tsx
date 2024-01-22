@@ -13,17 +13,17 @@ const BeritaTerbaru = async () => {
   const { posts } = await fetchBeritaTerbaru(10);
 
   return (
-    <section className="w-[766px] bg-brand-white">
+    <section className="w-full md:w-[766px] bg-brand-white">
       <Link
         href="/berita/berita-terbaru"
-        className="h-[60px] w-fit flex items-center gap-x-2 border-b border-brand-gray px-6"
+        className="h-10 md:h-[60px] w-fit flex items-center gap-x-2 border-b border-brand-gray px-6"
       >
         <h2 className="text-base text-brand-dark font-semibold hover:text-main-red transition-colors">
           Berita Terbaru
         </h2>
         <ChevronRight size={16} />
       </Link>
-      <div className="p-6 flex items-center justify-between">
+      <div className="hidden md:flex p-6 items-center justify-between">
         {posts.slice(0, 3).map((post: any) => {
           const hasThumb = typeof getThumb(post.body) === "string";
           return (
@@ -77,13 +77,13 @@ const BeritaTerbaru = async () => {
                       <Image
                         src={getThumb(post.body) || ""}
                         alt="Thumbnail"
-                        width={10}
-                        height={10}
+                        width={40}
+                        height={40}
                         className="h-[40px] w-[40px] object-cover"
                       />
                     </div>
                   )}
-                  <div className="flex items-center gap-x-1.5">
+                  <div className="hidden md:flex items-center gap-x-1.5">
                     <p className="max-w-[400px] truncate text-sm text-brand-dark font-medium group-hover:text-brand-red transition-colors">
                       {post.title}
                     </p>
@@ -94,6 +94,19 @@ const BeritaTerbaru = async () => {
                     <span className="text-[10px] text-brand-inactive font-medium">
                       {dayjs().to(dayjs(`${post.createdAt}`))}
                     </span>
+                  </div>
+                  <div className="flex md:hidden flex-col gap-y-1.5">
+                    <p className="text-sm text-main-dark font-medium max-w-[300px] truncate">
+                      {post.title}
+                    </p>
+                    <div className="leading-none flex items-center gap-x-1.5">
+                      <span className="text-[10px] text-brand-dark font-medium leading-none">
+                        {post.user.name}
+                      </span>
+                      <span className="text-[10px] text-brand-inactive font-medium">
+                        {dayjs().to(dayjs(`${post.createdAt}`))}
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </li>

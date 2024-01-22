@@ -19,12 +19,12 @@ export default function KomunitasCategory({
   searchParams: { t, page },
 }: Props) {
   return (
-    <div className="max-w-7xl mx-auto py-5 px-10">
+    <div className="w-full md:max-w-7xl mx-auto py-3 md:py-5 px-0 md:px-10">
       <div className="gap-x-[14px] flex items-start">
-        <div>
+        <div className="w-full">
           <CommunityCategory category={category} page={page} />
         </div>
-        <div className="w-full space-y-[14px]">
+        <div className="hidden md:block w-full space-y-[14px]">
           <TopBanner />
           <SideNavigation />
           <UtamaTerkini category={category} t={t} page={page} />

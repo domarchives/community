@@ -70,3 +70,22 @@ export const fetchKonsepSaya = async (returnType: string, page?: number) => {
     console.log(error);
   }
 };
+
+export const fetchTransactionHistory = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.API_URL}/api/profile/transaction-history`,
+      {
+        method: "GET",
+        cache: "no-store",
+        headers: headers(),
+      }
+    );
+    const data = await response.json();
+    if (response.ok) {
+      return data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

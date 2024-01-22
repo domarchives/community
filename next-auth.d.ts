@@ -8,6 +8,8 @@ declare module "next-auth" {
       provider: string;
       referralCode: string?;
       role: string;
+      address: string?;
+      network: string?;
     } & DefaultSession["user"];
   }
 }
@@ -21,5 +23,7 @@ declare module "next-auth/jwt" {
     referralCode: string?;
     provider: string;
     role: string;
+    address: string?;
+    network: string?;
   }
 }

@@ -1,8 +1,9 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 import db from "@/lib/db";
 import { getSessionUser } from "@/lib/auth";
-import { revalidatePath } from "next/cache";
+import { getPostsCount } from "@/lib/utils";
 
 export async function POST(req: NextRequest) {
   try {
@@ -14,14 +15,27 @@ export async function POST(req: NextRequest) {
 
     const { id, title, body, category, userId } = await req.json();
 
+    if (!title || !body || !category || !userId) {
+      return NextResponse.json({ message: "Invalid Data" }, { status: 400 });
+    }
+
+    let point = 0;
     if (category.includes("berita")) {
       if (session.user.role !== "ADMIN") {
         return NextResponse.json({ message: "Forbidden" }, { status: 403 });
       }
-    }
-
-    if (!title || !body || !category || !userId) {
-      return NextResponse.json({ message: "Invalid Data" }, { status: 400 });
+    } else {
+      const count = await getPostsCount(session.user.id);
+      if (count < 5) {
+        await db.point.create({
+          data: {
+            category: "ARTICLE_POST",
+            amount: 2,
+            userId: session.user.id,
+          },
+        });
+        point = 2;
+      }
     }
 
     if (typeof id !== "undefined" && id !== "") {
@@ -51,7 +65,7 @@ export async function POST(req: NextRequest) {
       });
 
       revalidatePath("/(site)/komunitas/[category]", "page");
-      return NextResponse.json({ post }, { status: 201 });
+      return NextResponse.json({ post, point }, { status: 201 });
     }
   } catch (error) {
     return NextResponse.json(

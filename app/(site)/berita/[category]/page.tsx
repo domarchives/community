@@ -23,12 +23,12 @@ export default async function BeritaCategory({
   const authenticated = await isAuthenticated();
 
   return (
-    <div className="max-w-7xl mx-auto py-5 px-10">
+    <div className="w-full md:max-w-7xl mx-auto py-3 md:py-5 md:px-10">
       <div className="gap-x-[14px] flex items-start">
-        <div className="space-y-[14px]">
+        <div className="w-full md:space-y-[14px]">
           <NewsCategory category={category} page={page || 1} />
         </div>
-        <div className="w-full space-y-[14px]">
+        <div className="hidden md:block w-full space-y-[14px]">
           {authenticated ? <Profile /> : <CredentialsLogin />}
           <Perhatian />
           <Exchanges />
