@@ -25,9 +25,9 @@ const Profile = () => {
           </Avatar>
           <div className="space-y-2.5">
             <div className="flex items-center gap-1.5">
-              <div className="w-[27px] h-[18px] text-sm text-brand-red font-semibold border border-brand-red rounded-sm flex justify-center items-center leading-none">
+              {/* <div className="w-[27px] h-[18px] text-sm text-brand-red font-semibold border border-brand-red rounded-sm flex justify-center items-center leading-none">
                 1
-              </div>
+              </div> */}
               <p className="text-base text-brand-dark font-semibold leading-none">
                 {session?.user.name}
               </p>
@@ -35,9 +35,9 @@ const Profile = () => {
                 <Edit />
               </Link>
             </div>
-            <p className="text-xs text-brand-inactive font-medium leading-none">
+            {/* <p className="text-xs text-brand-inactive font-medium leading-none">
               30% lagi untuk naik LV.5
-            </p>
+            </p> */}
           </div>
         </div>
         <button
@@ -48,7 +48,7 @@ const Profile = () => {
           KELUAR
         </button>
       </div>
-      <div className="py-2.5 px-5 space-y-1.5">
+      {/* <div className="py-2.5 px-5 space-y-1.5">
         <div className="flex items-center justify-between">
           <span className="text-xs text-brand-red font-semibold leading-none">
             LV. 4
@@ -63,7 +63,7 @@ const Profile = () => {
         <div className="relative w-full h-[5px] rounded-sm overflow-hidden bg-brand-gray">
           <div className="w-[20%] h-full bg-brand-red" />
         </div>
-      </div>
+      </div> */}
       <Link
         href="/tulis-artikel"
         className="w-full h-12 bg-brand-red text-brand-white text-sm font-semibold flex items-center justify-center hover:bg-brand-red/80 transition-colors"

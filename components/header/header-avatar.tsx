@@ -68,9 +68,9 @@ const HeaderAvatar = () => {
             </Avatar>
           )}
           <div className="flex items-center gap-x-1.5">
-            <span className="flex items-center justify-center rounded-sm h-4 w-[22px] border border-main-red text-xs text-main-red font-semibold leading-none">
+            {/* <span className="flex items-center justify-center rounded-sm h-4 w-[22px] border border-main-red text-xs text-main-red font-semibold leading-none">
               1
-            </span>
+            </span> */}
             <p className="max-w-[100px] text-sm text-main-dark font-semibold">
               {session?.user?.name}
             </p>

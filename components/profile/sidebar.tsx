@@ -22,15 +22,15 @@ const Sidebar = async () => {
         </Avatar>
 
         <div className="flex items-center gap-x-1.5 mb-2.5 pb-2.5">
-          <div className="w-[27px] h-[18px] rounded-sm border border-brand-red flex items-center justify-center text-sm text-brand-red leading-none font-semibold">
+          {/* <div className="w-[27px] h-[18px] rounded-sm border border-brand-red flex items-center justify-center text-sm text-brand-red leading-none font-semibold">
             1
-          </div>
+          </div> */}
           <p className="text-base text-brand-dark font-semibold leading-none">
             {session?.user.name}
           </p>
         </div>
 
-        <div className="w-full py-2.5 space-y-1.5">
+        {/* <div className="w-full py-2.5 space-y-1.5">
           <div className="flex items-center justify-between">
             <span className="text-xs leading-none text-brand-red font-semibold">
               LV. 4
@@ -48,7 +48,7 @@ const Sidebar = async () => {
               style={{ width: "20%" }}
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="py-2.5 flex items-center gap-x-1.5">
           <span className="text-xs text-brand-subgray2 font-normal">
