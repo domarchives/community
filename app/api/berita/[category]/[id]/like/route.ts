@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 
 import { getSessionUser } from "@/lib/auth";
+import { getLikesCount } from "@/lib/utils";
 import db from "@/lib/db";
 
 export async function POST(
@@ -43,7 +44,24 @@ export async function POST(
       },
     });
 
-    return NextResponse.json({ message: "Like successfully" }, { status: 200 });
+    let point = 0;
+    const postLikeCount = await getLikesCount(session.user.id);
+
+    if (postLikeCount <= 10) {
+      await db.point.create({
+        data: {
+          userId: session.user.id,
+          category: "LIKED_POST",
+          amount: 1,
+        },
+      });
+      point = 1;
+    }
+
+    return NextResponse.json(
+      { message: "Like successfully", point },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { message: "INTERNAL SERVER ERROR" },

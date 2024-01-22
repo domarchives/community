@@ -9,6 +9,14 @@ import Bagikan from "@/components/svg/bagikan";
 import Laporkan from "@/components/svg/laporkan";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
 
 interface Props {
   category: string;
@@ -18,6 +26,7 @@ interface Props {
 const BeritaDetailsButtons: React.FC<Props> = ({ category, post }) => {
   const { data: session, status } = useSession();
 
+  const [open, setOpen] = useState<boolean>(false);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 
   useEffect(() => {
@@ -63,6 +72,9 @@ const BeritaDetailsButtons: React.FC<Props> = ({ category, post }) => {
         const data = await response.json();
         if (response.ok) {
           router.refresh();
+          if (data.point > 0) {
+            setOpen(true);
+          }
         } else {
           return alert(data.message);
         }
@@ -110,63 +122,85 @@ const BeritaDetailsButtons: React.FC<Props> = ({ category, post }) => {
   };
 
   return (
-    <div className="p-5 md:p-6 flex items-center justify-between gap-x-5 md:gap-x-0">
-      {disabled ? (
+    <>
+      <div className="p-5 md:p-6 flex items-center justify-between gap-x-5 md:gap-x-0">
+        {disabled ? (
+          <Button
+            variant="outline"
+            className="flex items-center gap-x-1.5 w-full md:w-fit"
+            onClick={handlePostDislike}
+            disabled={status !== "authenticated"}
+          >
+            <Apresiasi color="#FF6975" />
+            <div className="flex items-center gap-x-1.5">
+              <span className="text-xs text-brand-red font-semibold">
+                Apresiasi
+              </span>
+              <span className="text-xs text-brand-blue font-semibold">
+                ({post._count.likes || 0})
+              </span>
+            </div>
+          </Button>
+        ) : (
+          <Button
+            variant="outline"
+            className="flex items-center gap-x-1.5 w-full md:w-fit"
+            onClick={handlePostLike}
+            disabled={status !== "authenticated" || disabled}
+          >
+            <Apresiasi />
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-brand-dark font-semibold">
+                Apresiasi
+              </span>
+              <span className="text-xs text-brand-blue font-semibold">
+                ({post._count.likes || 0})
+              </span>
+            </div>
+          </Button>
+        )}
         <Button
           variant="outline"
-          className="flex items-center gap-x-1.5 w-full md:w-fit"
-          onClick={handlePostDislike}
+          onClick={
+            status === "authenticated"
+              ? () => addBookmark()
+              : () => router.push("/masuk")
+          }
           disabled={status !== "authenticated"}
+          className="flex items-center gap-x-1.5 w-full md:w-[100px]"
         >
-          <Apresiasi color="#FF6975" />
-          <div className="flex items-center gap-x-1.5">
-            <span className="text-xs text-brand-red font-semibold">
-              Apresiasi
-            </span>
-            <span className="text-xs text-brand-blue font-semibold">
-              ({post._count.likes || 0})
-            </span>
-          </div>
+          <Tandai color={isBookmarked ? "#FF6975" : "#525252"} />
+          <span
+            className={cn(
+              "text-xs text-brand-dark font-semibold",
+              isBookmarked && "text-brand-red"
+            )}
+          >
+            Tandai
+          </span>
         </Button>
-      ) : (
-        <Button
-          variant="outline"
-          className="flex items-center gap-x-1.5 w-full md:w-fit"
-          onClick={handlePostLike}
-          disabled={status !== "authenticated" || disabled}
-        >
-          <Apresiasi />
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs text-brand-dark font-semibold">
-              Apresiasi
-            </span>
-            <span className="text-xs text-brand-blue font-semibold">
-              ({post._count.likes || 0})
-            </span>
-          </div>
-        </Button>
-      )}
-      <Button
-        variant="outline"
-        onClick={
-          status === "authenticated"
-            ? () => addBookmark()
-            : () => router.push("/masuk")
-        }
-        disabled={status !== "authenticated"}
-        className="flex items-center gap-x-1.5 w-full md:w-[100px]"
-      >
-        <Tandai color={isBookmarked ? "#FF6975" : "#525252"} />
-        <span
-          className={cn(
-            "text-xs text-brand-dark font-semibold",
-            isBookmarked && "text-brand-red"
-          )}
-        >
-          Tandai
-        </span>
-      </Button>
-    </div>
+      </div>
+
+      <AlertDialog open={open} onOpenChange={setOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-center text-lg text-main-dark font-semibold mb-4">
+              Liked a post! +1 KITA point
+            </AlertDialogTitle>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction asChild>
+              <Button
+                onClick={() => setOpen(false)}
+                className="w-full bg-main-red hover:bg-main-red/90"
+              >
+                Continue
+              </Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 };
 
