@@ -8,7 +8,9 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import SideBanner from "@/components/home/side-banner";
 import Perhatian from "@/components/home/perhatian";
 import PostDetailsButtons from "@/components/post-details-buttons";
-import Comments from "./comments";
+import Comments from "@/components/comments";
+import SideNavigation from "@/components/komunitas/side-navigation";
+import PostList from "@/components/komunitas/post-list";
 
 dayjs.extend(customParseFormat);
 
@@ -85,9 +87,11 @@ const PostDetails: React.FC<Props> = async ({ category, post }) => {
         </div>
         <Comments mainType="komunitas" category={category} postId={post.id} />
       </section>
-      <section className="hidden md:block w-[420px]">
+      <section className="hidden md:block w-[420px] space-y-3 md:space-y-[14px]">
         <SideBanner />
+        <SideNavigation />
         <Perhatian />
+        <PostList />
       </section>
     </div>
   );

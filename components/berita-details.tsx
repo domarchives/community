@@ -9,6 +9,8 @@ import SideBanner from "@/components/home/side-banner";
 import Perhatian from "@/components/home/perhatian";
 import BeritaDetailsButtons from "@/components/berita-details-buttons";
 import Comments from "@/components/comments";
+import SideNavigation from "@/components/berita/side-navigation";
+import PostList from "@/components/berita/post-list";
 
 dayjs.extend(customParseFormat);
 
@@ -85,9 +87,11 @@ const BeritaDetails = ({ category, post }: Props) => {
         </div>
         <Comments mainType="berita" category={category} postId={post.id} />
       </section>
-      <section className="hidden md:block w-[420px]">
+      <section className="hidden md:block w-[420px] space-y-3 md:space-y-[14px]">
         <SideBanner />
+        <SideNavigation />
         <Perhatian />
+        <PostList />
       </section>
     </div>
   );
