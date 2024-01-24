@@ -129,7 +129,7 @@ const KoinPertukaran = () => {
           >
             Koin
           </h2>
-          <span className="text-base text-brand-subgray">|</span>
+          {/* <span className="text-base text-brand-subgray">|</span>
           <h2
             onClick={() => setSelected("pertukaran")}
             className={cn(
@@ -138,7 +138,7 @@ const KoinPertukaran = () => {
             )}
           >
             Pertukaran
-          </h2>
+          </h2> */}
         </div>
         {status === "authenticated" && session.user.role.includes("ADMIN") && (
           <div>
@@ -153,7 +153,7 @@ const KoinPertukaran = () => {
         )}
       </div>
 
-      <div className="px-6 h-[120px] flex flex-col justify-center items-center">
+      {/* <div className="px-6 h-[120px] flex flex-col justify-center items-center">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -201,7 +201,7 @@ const KoinPertukaran = () => {
             />
           </form>
         </Form>
-      </div>
+      </div> */}
 
       <div>
         <Table>
@@ -209,15 +209,15 @@ const KoinPertukaran = () => {
             <TableRow className="flex items-center">
               <TableHead className="text-xs text-brand-inactive font-medium flex items-center gap-x-2 w-[40%]">
                 <span className="w-[77px]">Koin/Volume Perdagangan</span>
-                <ArrowUpDown size={12} className="cursor-pointer" />
+                {/* <ArrowUpDown size={12} className="cursor-pointer" /> */}
               </TableHead>
               <TableHead className="text-xs text-brand-inactive font-medium flex items-center gap-x-2 w-[30%]">
                 <span className="w-[72px]">Harga (USD)</span>
-                <ArrowUpDown size={12} className="cursor-pointer" />
+                {/* <ArrowUpDown size={12} className="cursor-pointer" /> */}
               </TableHead>
               <TableHead className="text-xs text-brand-inactive font-medium flex items-center justify-end gap-x-2 text-right w-[30%]">
                 <span className="w-[62px]">Perubahan 24jam</span>
-                <ArrowUpDown size={12} className="cursor-pointer" />
+                {/* <ArrowUpDown size={12} className="cursor-pointer" /> */}
               </TableHead>
             </TableRow>
           </TableHeader>
