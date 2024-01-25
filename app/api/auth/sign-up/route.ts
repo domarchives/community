@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import * as bcrypt from "bcryptjs";
-import crypto from "crypto";
+import randomstring from "randomstring";
 
 import db from "@/lib/db";
 
@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
       data: {
         name,
         email,
+        code: randomstring.generate(10),
         password: hashedPassword,
         referralCode,
       },
