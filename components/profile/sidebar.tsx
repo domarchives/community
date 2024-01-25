@@ -55,9 +55,9 @@ const Sidebar = async () => {
             Kode Rujukan Saya:
           </span>
           <span className="text-xs text-brand-dark font-semibold">
-            {session?.user.referralCode || "-"}
+            {session?.user.code || "-"}
           </span>
-          {session?.user.referralCode && (
+          {session?.user.code && (
             <button
               type="button"
               className="hover:bg-brand-gray transition-colors rounded-full"
