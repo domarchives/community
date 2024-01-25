@@ -10,7 +10,15 @@ const HeaderLogo = () => {
         width={142}
         height={40}
         priority
-        className="object-contain"
+        className="object-contain hidden md:block"
+      />
+      <Image
+        src="/images/mobile-logo.png"
+        alt="Logo"
+        width={100}
+        height={30}
+        priority
+        className="object-contain md:hidden"
       />
     </Link>
   );
