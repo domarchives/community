@@ -9,20 +9,20 @@ if (!process.env.NEXTAUTH_SECRET) {
   throw new Error("NEXTAUTH_SECRET not found");
 }
 
-if (!process.env.GOOGLE_CLIENT_ID) {
-  throw new Error("GOOGLE_CLIENT_ID not found");
-}
+// if (!process.env.GOOGLE_CLIENT_ID) {
+//   throw new Error("GOOGLE_CLIENT_ID not found");
+// }
 
-if (!process.env.GOOGLE_CLIENT_SECRET) {
-  throw new Error("GOOGLE_CLIENT_SECRET not found");
-}
+// if (!process.env.GOOGLE_CLIENT_SECRET) {
+//   throw new Error("GOOGLE_CLIENT_SECRET not found");
+// }
 
 const authOptions: NextAuthOptions = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    // }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
