@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
           name,
           email,
           image,
+          code: "",
           provider: "GOOGLE",
         },
       });
