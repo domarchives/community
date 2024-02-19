@@ -5,27 +5,22 @@ const snsList = [
   {
     name: "Telegram",
     image: "/images/telegram.svg",
-    href: "#",
+    href: "https://t.me/kitafoundationchat",
   },
   {
     name: "Twitter",
     image: "/images/twitter.svg",
-    href: "#",
+    href: "https://twitter.com/KitaFoundation_",
   },
   {
     name: "Instagram",
     image: "/images/instagram.svg",
-    href: "#",
+    href: "https://www.instagram.com/kita_foundation_official/",
   },
   {
     name: "Medium",
     image: "/images/medium.svg",
-    href: "#",
-  },
-  {
-    name: "Discord",
-    image: "/images/discord.svg",
-    href: "#",
+    href: "https://medium.com/@social_44114",
   },
 ];
 
@@ -149,7 +144,7 @@ const Footer = () => {
                 <h3 className="text-base text-black font-semibold leading-none">
                   SNS
                 </h3>
-                <ul className="flex items-center gap-x-5">
+                <ul className="flex items-center justify-between">
                   {snsList.map((sns) => (
                     <li key={`sns-${sns.name}`}>
                       <a
