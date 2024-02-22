@@ -44,7 +44,7 @@ const BeritaTerbaru = async () => {
                 )}
               </div>
               <p className="text-base text-brand-dark font-semibold leading-[120%] max-w-[230px] tracking-[-0.5px] mb-2.5 group-hover:text-brand-red transition-colors">
-                {`${post.title?.substring(0, 50)} ...`}
+                {`${post.title?.substring(0, 40)} ...`}
               </p>
               <div className="flex items-center gap-x-1.5">
                 <span className="text-sm font-medium text-brand-subgray2">
