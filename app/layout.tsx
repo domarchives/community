@@ -28,7 +28,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>{children}</SessionProvider>
         <Toaster />
       </body>
-      <GoogleAnalytics gaId="G-NQLJGFT6CD" />
+      <GoogleAnalytics gaId={process.env.GA_ID as string} />
     </html>
   );
 }
