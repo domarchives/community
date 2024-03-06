@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { getServerSession } from "next-auth";
 
 import "./globals.css";
@@ -27,6 +28,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>{children}</SessionProvider>
         <Toaster />
       </body>
+      <GoogleAnalytics gaId="G-NQLJGFT6CD" />
     </html>
   );
 }
