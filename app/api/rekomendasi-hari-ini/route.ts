@@ -1,8 +1,11 @@
 import db from "@/lib/db";
 import { type NextRequest, NextResponse } from "next/server";
 
-export async function GET(_req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
+    const url = new URL(req.url);
+    const limit = url.searchParams.get("limit");
+
     const posts = await db.post.findMany({
       where: {
         posted: true,
@@ -26,7 +29,7 @@ export async function GET(_req: NextRequest) {
       orderBy: {
         createdAt: "desc",
       },
-      take: 15,
+      take: limit ? Number(limit) : 15,
     });
 
     return NextResponse.json({ posts }, { status: 200 });

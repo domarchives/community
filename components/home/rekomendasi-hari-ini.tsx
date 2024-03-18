@@ -9,7 +9,7 @@ import HottestMd from "@/components/svg/hottest-md";
 import HottestSm from "../svg/hottest-sm";
 
 const RekomensasiHariIni = async () => {
-  const { posts } = await fetchRekomendasiHariIni();
+  const { posts } = await fetchRekomendasiHariIni(15);
 
   return (
     <section className="w-full md:w-[766px] bg-brand-white">
