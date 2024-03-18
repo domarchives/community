@@ -7,6 +7,9 @@ export const fetchRekomendasiHariIni = async () => {
       {
         method: "GET",
         cache: "no-store",
+        next: {
+          revalidate: 30,
+        },
       }
     );
     const data = await response.json();

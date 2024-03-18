@@ -97,6 +97,7 @@ export async function PUT(
       },
     });
 
+    revalidatePath("/", "page");
     revalidatePath("/(site)/komunitas/[category]/[id]", "page");
     revalidatePath("/(site)/berita/[category]/[id]", "page");
 

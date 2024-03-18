@@ -51,6 +51,7 @@ export async function POST(req: NextRequest) {
         },
       });
 
+      revalidatePath("/", "page");
       revalidatePath("/(site)/komunitas/[category]", "page");
       return NextResponse.json({ post }, { status: 201 });
     } else {
@@ -64,6 +65,7 @@ export async function POST(req: NextRequest) {
         },
       });
 
+      revalidatePath("/", "page");
       revalidatePath("/(site)/komunitas/[category]", "page");
       return NextResponse.json({ post, point }, { status: 201 });
     }
