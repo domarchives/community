@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -34,6 +34,14 @@ const formSchema = z.object({
 const MyWallet = () => {
   const router = useRouter();
   const { update } = useSession();
+
+  const [address, setAddress] = useState<string>("");
+
+  useEffect(() => {
+    if (window && typeof window.ethereum !== "undefined") {
+      setAddress(window.ethereum.selectedAddress);
+    }
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -82,7 +90,13 @@ const MyWallet = () => {
       <h2 className="h-10 md:h-[60px] px-5 md:px-6 flex items-center text-base text-main-dark font-semibold border-b border-main-grey">
         Ubah Informasi Wallet
       </h2>
-      <Form {...form}>
+      <div className="py-6 md:py-10 px-5 md:px-6">
+        <span className="text-sm font-semibold inline-block mb-2">
+          Alamat Wallet
+        </span>
+        <p className="text-sm text-muted-foreground">{address}</p>
+      </div>
+      {/* <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="py-6 md:py-10 px-5 md:px-6 space-y-3 md:space-y-6"
@@ -138,7 +152,7 @@ const MyWallet = () => {
             Simpan
           </Button>
         </form>
-      </Form>
+      </Form> */}
     </section>
   );
 };

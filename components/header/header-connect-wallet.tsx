@@ -15,9 +15,7 @@ import { Button } from "@/components/ui/button";
 
 const HeaderConnectWallet = () => {
   const [open, setOpen] = useState<boolean>(false);
-  const [address, setAddress] = useState<string>(
-    window.ethereum?.selectedAddress || ""
-  );
+  const [address, setAddress] = useState<string>("");
 
   useEffect(() => {
     const connect = async () => {
@@ -29,6 +27,12 @@ const HeaderConnectWallet = () => {
       }
     };
     connect();
+  }, []);
+
+  useEffect(() => {
+    if (window && typeof window.ethereum !== "undefined") {
+      setAddress(window.ethereum?.selectedAddress);
+    }
   }, []);
 
   const onOpenChange = () => {
