@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 const HeaderConnectWallet = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [address, setAddress] = useState<string>(
-    window.ethereum.selectedAddress || ""
+    window.ethereum?.selectedAddress || ""
   );
 
   useEffect(() => {
