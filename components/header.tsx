@@ -9,6 +9,7 @@ import HeaderLoginButton from "@/components/header/header-login-button";
 import HeaderAvatar from "@/components/header/header-avatar";
 import HeaderSearch from "@/components/header/header-search";
 import MobileMenu from "@/components/header/mobile-menu";
+import HeaderConnectWallet from "./header/header-connect-wallet";
 
 const Header = () => {
   const { status } = useSession();
@@ -21,13 +22,16 @@ const Header = () => {
           <HeaderLogo />
           <HeaderMenuList />
         </div>
+        <HeaderSearch />
         <div className="flex items-center gap-x-2.5">
           {status === "authenticated" ? (
-            <HeaderAvatar />
+            <div className="flex items-center gap-x-4">
+              <HeaderAvatar />
+              <HeaderConnectWallet />
+            </div>
           ) : (
             <HeaderLoginButton />
           )}
-          <HeaderSearch />
         </div>
       </nav>
 

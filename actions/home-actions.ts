@@ -8,7 +8,6 @@ export const fetchRekomendasiHariIni = async (limit: number | undefined) => {
 
     const response = await fetch(URL, {
       method: "GET",
-      cache: "no-store",
       next: {
         revalidate: 30,
       },

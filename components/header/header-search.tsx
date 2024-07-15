@@ -30,7 +30,7 @@ const HeaderSearch = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex-1 px-20">
         <FormField
           control={form.control}
           name="q"
